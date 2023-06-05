@@ -7,8 +7,40 @@ import './css/styles.css';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
 
-import { getUserBookings } from './api-calls';
+import { getUserBookings, getRooms } from './api-calls';
 
 console.log('This is the JavaScript entry file - your code begins here.');
 
+// GLOBAL VARIABLES
+
+let rooms;
+
+// EVENT LISTENERS
+
+window.addEventListener('load', () => {
+  getRooms()
+        .then(result => {
+          rooms = result
+          getTotalExpense(1)
+        })
+})
+
+// FUNCTIONS
+
+getRooms()
+
 getUserBookings(1)
+
+const getTotalExpense = (userId) => {
+  getUserBookings(userId)
+    .then(result => {
+      const hey =  result.map(booking => {
+        return rooms.find(r => r.number === booking.roomNumber)
+        .costPerNight
+      }).reduce((totalExpense, costPerRoom) => {
+        return totalExpense += costPerRoom
+      }, 0).toFixed(2)
+      console.log(`$${hey}`)
+  })
+}
+
