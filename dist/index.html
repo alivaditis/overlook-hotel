@@ -5,9 +5,85 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Webpack Starter Kit</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+  </style>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
+  <aside class="scroll-nav-container">
+    <ul class="scroll-nav" role="nav">
+      <li class="nav-item">Overview</li>
+      <li class="nav-item">Book Now</li>
+      <li class="nav-item">Your Bookings</li>
+    </ul>
+  </aside>
+  <section class="landing">
+    <nav>
+      <h1>Overlook Hotels</h1>
+      <div class="sign-in">
+        <img  src="../src/images/user.png" alt='user-icon'>
+        <p>Sign In</p>
+      </div>
+    </nav>
+    <article class="splash">
+      <h2 class="location">Zermatt, Switzerland</h2>
+    </article>
+  </section>
+  <section class="overview">
+    Welcome to Alpine Haven Spa Hotel, a luxurious getaway nestled in the heart of the Alps. Our retreat offers a perfect blend of tranquility, rejuvenation, and indulgence. Immerse yourself in breathtaking landscapes and panoramic mountain views from our cozy accommodations. Our world-class spa and wellness facilities provide a wide range of treatments and therapies for ultimate relaxation. Indulge in exquisite dining experiences with locally sourced ingredients. Explore hiking trails, ski on world-class slopes, or enjoy leisurely activities like helicopter rides. We also cater to exclusive events and retreats. Experience the ultimate Alpine escape at Alpine Haven Spa Hotel.
+  </section>
+  <section class="book">
+    Yo
+  </section>
+  <section class="user-dashboard">
+    <div class="dashboard-container">
+      <div class="table-container">
+        <section class="upcoming">
+          <h2>Upcoming Bookings</h2>
+          <table>
+            <tr>
+              <th>Date Booked</th>
+              <th>Room Type</th>
+              <th>Bidet</th>
+              <th>Bed Size</th>
+              <th>Bed Number</th>
+              <th>Cost Per Night</th>
+            </tr>
+            <tr>
+              <td>6/5/23</td>
+              <td>Suite</td>
+              <td>True</td>
+              <td>Queen</td>
+              <td>1</td>
+              <td>$1,000</td>
+            </tr>
+          </table>
+        </section>
+        <section class="past">
+          <h2>Past Bookings</h2>
+          <table>  
+            <tr>
+              <th>Date Booked</th>
+              <th>Room Type</th>
+              <th>Bidet</th>
+              <th>Bed Size</th>
+              <th>Bed Number</th>
+              <th>Cost Per Night</th>
+            </tr>
+            <tr>
+              <td>6/5/23</td>
+              <td>Suite</td>
+              <td>True</td>
+              <td>Queen</td>
+              <td>1</td>
+              <td>$1,000</td>
+            </tr>
+          </table>
+        </section>
+      </div>
+      <section class="total-expense">Total Exense: $4,000</section>
+    </div>
+  </section>
   
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
