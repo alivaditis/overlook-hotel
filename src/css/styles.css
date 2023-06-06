@@ -1,3 +1,73 @@
+/* CSS RESET */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
 body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+#root, #__next {
+  isolation: isolate;
+}
+
+.nav-item:hover {
+  cursor: pointer;
+  color: red;
+}
+
+/* Landing */
+
+.landing {
+  height: 100vh;
+  background: url("../images/yura-lytkin-RmsojUccY4I-unsplash.jpg");
+  background-size: cover; 
+  background-position: 0 90%; 
+}
+
+nav {
+  height: 10dvh;
+}
+
+.splash {
+  height:90dvh;
+}
+
+/* ASIDE */
+
+.scroll-nav-container {
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  right: 1rem;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+}
+
+.overview, .book, .user-dashboard {
+  height: 100vh;
 }
