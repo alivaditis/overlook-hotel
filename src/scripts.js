@@ -21,14 +21,14 @@ window.addEventListener('load', () => {
   getRooms()
         .then(result => {
           rooms = result
-          getTotalExpense(12)
+          console.log(getTotalExpense(13))
         })
 })
 
 // FUNCTIONS
 
 const getTotalExpense = (userId) => {
-  getUserBookings(userId)
+  return getUserBookings(userId)
     .then(result => {
       return result.map(booking => {
         return rooms.find(r => r.number === booking.roomNumber)
