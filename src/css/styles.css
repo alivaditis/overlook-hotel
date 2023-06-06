@@ -65,6 +65,24 @@ p, h1, h2, h3, h4, h5, h6 {
 
 nav {
   height: 10dvh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1, .sign-in {
+  margin: 0 2rem;
+  padding: 0 1rem;;
+}
+
+h1 {
+  font-size: 32px;
+  background-color: red;
+  color: white;
+}
+
+.sign-in {
+  display: flex;
 }
 
 .splash {
@@ -72,13 +90,13 @@ nav {
   position: relative;
 }
 
-h1 {
+.location {
   position: absolute;
   left: 20px;
   bottom: 0;
   font-size: 100px;
   color: white;
-  /* text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 /* ASIDE */
@@ -143,4 +161,5 @@ table {
 
 .total-expense {
   align-self: end;
+  margin-right: 1rem;
 }
