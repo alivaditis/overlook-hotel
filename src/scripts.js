@@ -21,26 +21,21 @@ window.addEventListener('load', () => {
   getRooms()
         .then(result => {
           rooms = result
-          getTotalExpense(1)
+          getTotalExpense(12)
         })
 })
 
 // FUNCTIONS
 
-getRooms()
-
-getUserBookings(1)
-
 const getTotalExpense = (userId) => {
   getUserBookings(userId)
     .then(result => {
-      const hey =  result.map(booking => {
+      return result.map(booking => {
         return rooms.find(r => r.number === booking.roomNumber)
         .costPerNight
       }).reduce((totalExpense, costPerRoom) => {
         return totalExpense += costPerRoom
       }, 0).toFixed(2)
-      console.log(`$${hey}`)
   })
 }
 
