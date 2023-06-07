@@ -1,6 +1,7 @@
 
 const renderBookings = (tableElement, bookings) => {
   tableElement.innerHTML = ''
+  if (bookings.length) {
   tableElement.innerHTML += `
      <tr>
       <th>Date Booked</th>
@@ -11,7 +12,6 @@ const renderBookings = (tableElement, bookings) => {
       <th>Cost Per Night</th>
     </tr>
   `
-  if (bookings.length) {
     bookings.forEach((booking, i) => {
     tableElement.innerHTML += `
       <tr>
@@ -24,6 +24,8 @@ const renderBookings = (tableElement, bookings) => {
       <tr>
     `
     });
+  } else {
+    tableElement.innerText = 'No bookings!'
   }
 }
 
