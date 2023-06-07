@@ -6,7 +6,7 @@ import './css/styles.css';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 
-import { calculateExpense } from './bookings';
+import { calculateExpense, seperateUpcomingPast, sortByDate } from './bookings';
 import { getUserBookings, getBookingInfo, getRooms, getCostsPerNight } from './api-calls';
 import { renderBookings, renderTotalExpense } from './dom-updates'
 
@@ -21,8 +21,7 @@ const totalDisplay = document.querySelector('.total-expense')
 // GLOBAL VARIABLES
 
 let rooms
-const currentDate = new Date()
-const userId = 9
+const userId = 17
 
 // EVENT LISTENERS
 
@@ -32,29 +31,13 @@ window.addEventListener('load', () => {
       rooms = result  
       getBookingInfo(userId)
         .then(result => {
-          renderBookings(pastTable, result)
+          const seperated = seperateUpcomingPast(result)
+          renderBookings(upcomingTable, sortByDate(seperated.upcoming))
+          renderBookings(pastTable, sortByDate(seperated.past))
         })
       getCostsPerNight(userId)
         .then(result => renderTotalExpense(totalDisplay, calculateExpense(result)))
     })
-  // getUserBookings(userId)
-  //   .then(result => {
-  //     renderBookings(pastTable, result)
-  //   })
 })
-
-// FUNCTIONS
-
-// const getTotalExpense = (userId) => {
-//   return getUserBookings(userId)
-//     .then(result => {
-//       return result.map(booking => {
-//         return rooms.find(r => r.number === booking.roomNumber)
-//         .costPerNight
-//       }).reduce((totalExpense, costPerRoom) => {
-//         return totalExpense += costPerRoom
-//       }, 0).toFixed(2)
-//   })
-// }
 
 export { rooms }
