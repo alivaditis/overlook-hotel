@@ -60,7 +60,7 @@ nav {
 
 h1, .sign-in {
   margin: 0 3rem;
-  padding: 0 1rem;;
+  padding: 0 4px;
   z-index: 1;
 }
 
@@ -78,6 +78,7 @@ h1:hover {
 .sign-in {
   display: flex;
   align-items: center;
+  background-color: red;
 }
 
 .user-icon {
@@ -149,8 +150,11 @@ h1:hover {
   color: black;
 }
 
+/* BOOK NOW */
 
-
+.book-now-table {
+  width: 75%;
+}
 
 /* DASHBOARD */
 

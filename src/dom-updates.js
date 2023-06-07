@@ -29,8 +29,16 @@ const renderBookings = (tableElement, bookings) => {
   }
 }
 
+const renderTableHeader = (element, bookings, past) => {
+  if(past) {
+    element.innerText = `Past Bookings: ${bookings.length}`
+  } else {
+    element.innerText = `Upcoming Bookings: ${bookings.length}`
+  }
+}
+
 const renderTotalExpense = (element, total) => {
   element.innerText = `Total Expense: $${total}`
 }
 
-export { renderBookings, renderTotalExpense }
+export { renderBookings, renderTotalExpense, renderTableHeader }

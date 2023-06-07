@@ -7,6 +7,7 @@
   <title>Webpack Starter Kit</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+    @import url("https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css");
   </style>
 </head>
 <body>
@@ -33,13 +34,34 @@
     Welcome to Overlook Alpine Haven Spa Hotel, a captivating destination nestled in the enchanting village of Zermatt, Switzerland. As part of the renowned Overlook Hotels collection, our retreat offers a luxurious getaway experience in the heart of the Swiss Alps. Immerse yourself in breathtaking landscapes and panoramic mountain views of the iconic Matterhorn from our cozy accommodations. Indulge in our world-class spa and wellness facilities, where rejuvenation and relaxation await. Delight your senses with exquisite dining experiences, showcasing the finest locally sourced ingredients. Embark on adventures through hiking trails, skiing on world-class slopes, or leisurely activities like helicopter rides, all within the picturesque setting of Zermatt. Whether you're planning an exclusive event or seeking a personal retreat, Overlook Alpine Haven Spa Hotel promises an unforgettable Alpine escape, providing the perfect blend of serenity, indulgence, and warm hospitality, synonymous with the Overlook Hotels name.
   </section>
   <section class="book">
-    Yo
+    <input id="date-select" name='date-select' type='text' placeholder="Select Date">
+    <section class="upcoming">
+      <h2>Available Rooms</h2>
+      <table class="book-now-table">
+        <tr>
+          <th>Room Type</th>
+          <th>Room Number</th>
+          <th>Bidet</th>
+          <th>Bed Size</th>
+          <th>Bed Number</th>
+          <th>Cost Per Night</th>
+        </tr>
+        <tr>
+          <td>Room Number</td>
+          <td>Suite</td>
+          <td>True</td>
+          <td>Queen</td>
+          <td>1</td>
+          <td>$1,000</td>
+        </tr>
+      </table>
+    </section>
   </section>
   <section class="user-dashboard">
     <div class="dashboard-container">
       <div class="table-container">
         <section class="upcoming">
-          <h2>Upcoming Bookings</h2>
+          <h2 class="upcoming-header">Upcoming Bookings</h2>
           <table class="upcoming-table">
             <tr>
               <th>Date Booked</th>
@@ -60,7 +82,7 @@
           </table>
         </section>
         <section class="past">
-        <h2>Past Bookings</h2>
+        <h2 class="past-header">Past Bookings</h2>
         <table class="past-table">  
             <tr>
               <th>Date Booked</th>

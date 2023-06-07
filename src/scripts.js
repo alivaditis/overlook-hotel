@@ -6,9 +6,10 @@ import './css/styles.css';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 
+import flatpickr from "flatpickr";
 import { calculateExpense, seperateUpcomingPast, sortByDate } from './bookings';
 import { getUserBookings, getBookingInfo, getRooms, getCostsPerNight } from './api-calls';
-import { renderBookings, renderTotalExpense } from './dom-updates'
+import { renderBookings, renderTotalExpense, renderTableHeader } from './dom-updates'
 
 console.log('This is the JavaScript entry file - your code begins here.');
 
@@ -17,6 +18,14 @@ console.log('This is the JavaScript entry file - your code begins here.');
 const pastTable = document.querySelector('.past-table')
 const upcomingTable = document.querySelector('.upcoming-table')
 const totalDisplay = document.querySelector('.total-expense')
+const upcomingHeader = document.querySelector('.upcoming-header')
+const pastHeader = document.querySelector('.past-header')
+const dateSelect = document.querySelector('#date-select')
+const fp =  flatpickr(dateSelect, {
+  altInput: true,
+  altFormat: "F j, Y",
+  dateFormat: "Y-m-d"
+});
 
 // GLOBAL VARIABLES
 
@@ -32,6 +41,8 @@ window.addEventListener('load', () => {
       getBookingInfo(userId)
         .then(result => {
           const seperated = seperateUpcomingPast(result)
+          renderTableHeader(pastHeader, seperated.past, true)
+          renderTableHeader(upcomingHeader, seperated.upcoming, false)
           renderBookings(upcomingTable, sortByDate(seperated.upcoming))
           renderBookings(pastTable, sortByDate(seperated.past))
         })
@@ -39,5 +50,7 @@ window.addEventListener('load', () => {
         .then(result => renderTotalExpense(totalDisplay, calculateExpense(result)))
     })
 })
+
+
 
 export { rooms }
