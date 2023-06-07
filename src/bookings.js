@@ -1,4 +1,4 @@
-const getTotalExpense = (expenseList) => {
+const calculateExpense = (expenseList) => {
   if (!expenseList.length) {
     return 'Please book some rooms!'
   }
@@ -7,4 +7,4 @@ const getTotalExpense = (expenseList) => {
   }, 0).toFixed(2)
 }
 
-export { getTotalExpense }
+export { calculateExpense }

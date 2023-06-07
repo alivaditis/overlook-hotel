@@ -6,23 +6,41 @@ import './css/styles.css';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 
-import { getTotalExpense } from './bookings';
-import { getUserBookings, getRooms } from './api-calls';
+import { calculateExpense } from './bookings';
+import { getUserBookings, getBookingInfo, getRooms, getCostsPerNight } from './api-calls';
+import { renderBookings, renderTotalExpense } from './dom-updates'
 
 console.log('This is the JavaScript entry file - your code begins here.');
 
+// QUERY SELECTORS
+
+const pastTable = document.querySelector('.past-table')
+const upcomingTable = document.querySelector('.upcoming-table')
+const totalDisplay = document.querySelector('.total-expense')
+
 // GLOBAL VARIABLES
 
-let rooms;
+let rooms
+const currentDate = new Date()
+const userId = 9
 
 // EVENT LISTENERS
 
 window.addEventListener('load', () => {
   getRooms()
+    .then(result => {
+      rooms = result  
+      getBookingInfo(userId)
         .then(result => {
-          rooms = result
-          console.log(getTotalExpense(13))
+          renderBookings(pastTable, result)
         })
+      getCostsPerNight(userId)
+        .then(result => renderTotalExpense(totalDisplay, calculateExpense(result)))
+    })
+  // getUserBookings(userId)
+  //   .then(result => {
+  //     renderBookings(pastTable, result)
+  //   })
 })
 
 // FUNCTIONS
@@ -39,3 +57,4 @@ window.addEventListener('load', () => {
 //   })
 // }
 
+export { rooms }
