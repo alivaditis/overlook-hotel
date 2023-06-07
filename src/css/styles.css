@@ -37,19 +37,7 @@ p, h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
-.nav-item {
-  color: red;
-  font-weight: 700;
-  background-color: white;
-  margin-top: 4px;
-  margin-bottom: 4px;
-  padding: 1px 2px;
-}
 
-.nav-item:hover {
-  cursor: pointer;
-  color: black;
-}
 
 
 /* Landing */
@@ -71,8 +59,9 @@ nav {
 }
 
 h1, .sign-in {
-  margin: 0 2rem;
+  margin: 0 3rem;
   padding: 0 1rem;;
+  z-index: 1;
 }
 
 h1 {
@@ -81,8 +70,30 @@ h1 {
   color: white;
 }
 
+h1:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .sign-in {
   display: flex;
+  align-items: center;
+}
+
+.user-icon {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1);
+}
+
+.sign-in-text {
+  padding-left: 4px;
+}
+
+.sign-in:hover img, .sign-in:hover .sign-in-text {
+  color: black;
+  filter: grayscale(100%);
+  cursor: pointer;
 }
 
 .splash {
@@ -97,6 +108,10 @@ h1 {
   font-size: 100px;
   color: white;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.overview, .book, .user-dashboard {
+  height: 100vh;
 }
 
 /* ASIDE */
@@ -120,9 +135,22 @@ h1 {
   padding: 0;
 }
 
-.overview, .book, .user-dashboard {
-  height: 100vh;
+.nav-item {
+  color: red;
+  font-weight: 700;
+  background-color: white;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding: 1px 2px;
 }
+
+.nav-item:hover, .sign-in-text:hover {
+  cursor: pointer;
+  color: black;
+}
+
+
+
 
 /* DASHBOARD */
 
