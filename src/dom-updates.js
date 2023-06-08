@@ -9,9 +9,8 @@ const renderBookings = (tableElement, bookings) => {
      <tr>
       <th>Date</th>
       <th>Room Type</th>
+      <th>Beds</th>
       <th>Bidet</th>
-      <th>Bed Size</th>
-      <th class='number'>Beds</th>
       <th class='number'>Cost</th>
     </tr>
   `
@@ -20,9 +19,8 @@ const renderBookings = (tableElement, bookings) => {
       <tr>
         <td>${booking.date}</td>
         <td>${booking.roomType}</td>
+        <td>${booking.numBeds} ${booking.bedSize}</td>
         <td>${booking.bidet}</td>
-        <td>${booking.bedSize}</td>
-        <td class='number'>${booking.numBeds}</td>
         <td class='number'>$${booking.costPerNight.toFixed(2)}</td>
       <tr>
     `

@@ -37,9 +37,6 @@ p, h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
-
-
-
 /* Landing */
 
 .landing {
@@ -158,18 +155,19 @@ h1:hover {
 
 /* BOOK NOW */
 
-
 #date-select {
-  margin:120px 90px 40px;
+  margin:80px 80px 40px;
 }
 
 .book-now-table {
-  width: 40%;
+  width: 60%;
   border-collapse: collapse;
 }
 
 .book-now {
   margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
 }
 
 .please-select-message {
@@ -223,7 +221,7 @@ h1:hover {
   grid-template-columns: repeat(2, 1fr);
   width: 75vw;
   min-height: 60vh;
-  column-gap: 32px;
+  column-gap: 40px;
 }
 
 table {
