@@ -46,10 +46,10 @@ const renderAvailableRooms = (tableElement, rooms) => {
     rooms.forEach((room) => {
     tableElement.innerHTML += `
       <tr id='${room.number}' class='room'>
-        <td>${room.roomType}</td>
-        <td>${room.numBeds} ${room.bedSize}</td>
-        <td>${room.bidet}</td>
-        <td class='number'>$${room.costPerNight.toFixed(2)}</td>
+        <td class='click-me'>${room.roomType}</td>
+        <td class='click-me'>${room.numBeds} ${room.bedSize}</td>
+        <td class='click-me'>${room.bidet}</td>
+        <td class='click-me number'>$${room.costPerNight.toFixed(2)}</td>
       <tr>
     `
     });

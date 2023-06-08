@@ -8,7 +8,7 @@ import './css/styles.css';
 
 import flatpickr from "flatpickr";
 import { calculateExpense, seperateUpcomingPast, sortByDate, filterBookingsByDate, filterBookedRooms } from './bookings';
-import { getUserBookings, getBookingInfo, getRooms, getCostsPerNight, getAllBookings } from './api-calls';
+import { getUserBookings, getBookingInfo, getRooms, getCostsPerNight, getAllBookings, postRoomBooking } from './api-calls';
 import { renderAvailableRooms, renderBookings, renderTotalExpense, renderTableHeader } from './dom-updates'
 
 console.log('This is the JavaScript entry file - your code begins here.');
@@ -22,9 +22,8 @@ const totalDisplay = document.querySelector('.total-expense')
 const upcomingHeader = document.querySelector('.upcoming-header')
 const pastHeader = document.querySelector('.past-header')
 const dateSelect = document.querySelector('#date-select')
+const clickMe = document.querySelector('.click-me')
 const fp =  flatpickr(dateSelect, {
-  // altInput: true,
-  // altFormat: "F j, Y",
   dateFormat: "Y/m/d"
 });
 
@@ -47,23 +46,44 @@ window.addEventListener('load', () => {
           renderBookings(upcomingTable, sortByDate(seperated.upcoming))
           renderBookings(pastTable, sortByDate(seperated.past))
         })
-        getAllBookings()
-          .then(result => filterBookingsByDate(('2022/01/24'),result))
-          .then(bookedRooms => console.log(filterBookedRooms(rooms, bookedRooms)))
+
         getCostsPerNight(userId)
           .then(result => renderTotalExpense(totalDisplay, calculateExpense(result)))
     })
+
 })
 
 dateSelect.addEventListener('change', (event) => {
   getAllBookings()
-  .then(result => filterBookingsByDate((`${dateSelect.value}`),result))
-  .then(bookedRooms => filterBookedRooms(rooms, bookedRooms))
-  .then(availableRooms => renderAvailableRooms(bookNowTable, availableRooms))
+    .then(result => filterBookingsByDate((`${dateSelect.value}`),result))
+    .then(bookedRooms => filterBookedRooms(rooms, bookedRooms))
+    .then(availableRooms => renderAvailableRooms(bookNowTable, availableRooms))
 })
 
-bookNowTable.addEventListener('click', (e) => {
-  // if(e.target.id === )
+bookNowTable.addEventListener('click', (event) => {
+  if(event.target.classList.contains('click-me')) {
+    console.log('clicked!', event.target.parentNode.id)
+    // console.log(`userid: userId}, date: ${dateSelect.value}, ${event.target.parentNode.id}`)
+    postRoomBooking(userId, dateSelect.value, event.target.parentNode.id)
+      .then(result => {
+      getBookingInfo(userId)
+        .then(result => {
+            const seperated = seperateUpcomingPast(result)
+            renderTableHeader(pastHeader, seperated.past, true)
+            renderTableHeader(upcomingHeader, seperated.upcoming, false)
+            renderBookings(upcomingTable, sortByDate(seperated.upcoming))
+            renderBookings(pastTable, sortByDate(seperated.past))
+          })
+      getCostsPerNight(userId)
+        .then(result => renderTotalExpense(totalDisplay, calculateExpense(result)))
+      getAllBookings()
+          .then(result => filterBookingsByDate((`${dateSelect.value}`),result))
+          .then(bookedRooms => filterBookedRooms(rooms, bookedRooms))
+          .then(availableRooms => renderAvailableRooms(bookNowTable, availableRooms))
+      })
+  }
 })
+
+
 
 export { rooms }

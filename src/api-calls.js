@@ -49,4 +49,17 @@ const getRooms = () => {
   .then(data => data.rooms)
 }
 
-export { getAllBookings, getUserBookings, getRooms, getBookingInfo, getCostsPerNight }
+const postRoomBooking = (userId, date, roomNumber) => {
+  return fetch('http://localhost:3001/api/v1/bookings	', {
+    method: 'POST',
+    body: JSON.stringify({
+      "userID": parseInt(userId), 
+      "date": date, 
+      "roomNumber": parseInt(roomNumber)
+    }),
+    headers: { 'Content-Type': 'application/json' }
+  })
+  .catch(err => console.log("ERROR", err));
+}
+
+export { getAllBookings, getUserBookings, getRooms, getBookingInfo, getCostsPerNight, postRoomBooking }
