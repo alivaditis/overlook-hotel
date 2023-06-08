@@ -24,4 +24,15 @@ const sortByDate = (bookings) => {
   return bookings.sort((a, b) => new Date(a.date) - new Date(b.date))
 }
 
-export { calculateExpense, seperateUpcomingPast, sortByDate }
+const filterBookingsByDate = (inputValue, bookings) => {
+  return bookings.filter(booking => booking.date === inputValue)
+  .map(booking => booking.roomNumber)
+}
+
+const filterBookedRooms = (rooms, bookedRooms) => {
+  return rooms.filter(room => {
+    return !bookedRooms.some(bookedRoom => bookedRoom === room.number)
+  })
+}
+
+export { calculateExpense, seperateUpcomingPast, sortByDate, filterBookingsByDate, filterBookedRooms }

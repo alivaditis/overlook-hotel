@@ -1,15 +1,18 @@
+const dateMessage = document.querySelector('.date-message')
+const pleaseSelect = document.querySelector('.please-select-message')
+const roomHeader = document.querySelector('.room-header')
 
 const renderBookings = (tableElement, bookings) => {
   tableElement.innerHTML = ''
   if (bookings.length) {
   tableElement.innerHTML += `
      <tr>
-      <th>Date Booked</th>
+      <th>Date</th>
       <th>Room Type</th>
       <th>Bidet</th>
       <th>Bed Size</th>
-      <th>Bed Number</th>
-      <th>Cost Per Night</th>
+      <th class='number'>Beds</th>
+      <th class='number'>Cost</th>
     </tr>
   `
     bookings.forEach((booking, i) => {
@@ -19,13 +22,42 @@ const renderBookings = (tableElement, bookings) => {
         <td>${booking.roomType}</td>
         <td>${booking.bidet}</td>
         <td>${booking.bedSize}</td>
-        <td>${booking.numBeds}</td>
-        <td>${booking.costPerNight}</td>
+        <td class='number'>${booking.numBeds}</td>
+        <td class='number'>$${booking.costPerNight.toFixed(2)}</td>
       <tr>
     `
     });
   } else {
     tableElement.innerText = 'No bookings!'
+  }
+}
+
+const renderAvailableRooms = (tableElement, rooms) => {
+  tableElement.innerHTML = ''
+  if (rooms.length) {
+  tableElement.innerHTML += `
+     <tr>
+      <th>Room Type</th>
+      <th>Beds</th>
+      <th>Bidet</th>
+      <th class='number'>Cost</th>
+    </tr>
+  `
+    rooms.forEach((room) => {
+    tableElement.innerHTML += `
+      <tr id='${room.number}' class='room'>
+        <td>${room.roomType}</td>
+        <td>${room.numBeds} ${room.bedSize}</td>
+        <td>${room.bidet}</td>
+        <td class='number'>$${room.costPerNight.toFixed(2)}</td>
+      <tr>
+    `
+    });
+    roomHeader.classList.remove('hidden')
+    pleaseSelect.classList.add('hidden')
+  } else {
+    tableElement.classList.add('hidden')
+    dateMessage.classList.remove('hidden')
   }
 }
 
@@ -41,4 +73,4 @@ const renderTotalExpense = (element, total) => {
   element.innerText = `Total Expense: $${total}`
 }
 
-export { renderBookings, renderTotalExpense, renderTableHeader }
+export { renderAvailableRooms, renderBookings, renderTotalExpense, renderTableHeader }
