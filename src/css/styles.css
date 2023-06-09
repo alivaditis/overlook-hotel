@@ -37,9 +37,6 @@ p, h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
-
-
-
 /* Landing */
 
 .landing {
@@ -60,13 +57,13 @@ nav {
 
 h1, .sign-in {
   margin: 0 3rem;
-  padding: 0 1rem;;
+  padding: 0 4px;
   z-index: 1;
 }
 
 h1 {
   font-size: 32px;
-  background-color: red;
+  background-color: #EB0000;
   color: white;
 }
 
@@ -78,6 +75,7 @@ h1:hover {
 .sign-in {
   display: flex;
   align-items: center;
+  background-color: #EB0000;
 }
 
 .user-icon {
@@ -111,7 +109,7 @@ h1:hover {
 }
 
 .overview, .book, .user-dashboard {
-  height: 100vh;
+  min-height: 100vh;
 }
 
 /* ASIDE */
@@ -136,7 +134,7 @@ h1:hover {
 }
 
 .nav-item {
-  color: red;
+  color: #EB0000;
   font-weight: 700;
   background-color: white;
   margin-top: 4px;
@@ -149,15 +147,69 @@ h1:hover {
   color: black;
 }
 
+/* OVERVIEW */
+
+.overview {
+  background-color: black;
+}
+
+/* BOOK NOW */
+
+.book-container {
+  display: flex;
+  justify-content: center;
+}
+
+.book {
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+}
+
+#date-select {
+  align-self: flex-start;
+  margin: 40px 0 0;
+}
+
+.book-now-table {
+  border-collapse: collapse;
+}
+
+.book-now {
+  margin-bottom: 40px;
+}
+
+.please-select-message {
+  color: #EB0000;
+  font-size: 42px;
+  font-weight: 700;
+  margin-top: 80px;
+}
+
+.room-header {
+  color: #EB0000;
+}
+
+.room {
+  box-shadow: 0 0 0 1px gray;
+}
+
+.room:hover {
+  background-color: #EB0000;
+  border: 0;
+  color: white;
+  box-shadow: 0 0 0 1px black;
+  cursor: pointer;
+}
 
 
 
 /* DASHBOARD */
 
-.upcoming, .past {
+.upcoming, .past, .book-now {
   display: flex;
   flex-direction: column;
-  align-items:center
+  align-items:center;
 }
 
 .user-dashboard {
@@ -165,7 +217,7 @@ h1:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: red;
+  color: #EB0000;
 }
 
 .dashboard-container {
@@ -177,19 +229,33 @@ h1:hover {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   width: 75vw;
-  height: 60vh;
-  column-gap: 32px;
+  min-height: 60vh;
+  column-gap: 40px;
 }
 
 table {
-  border: solid;
+  color: black;
+  border-radius: 5px;
   width: 100%;
-  text-align: center;
+  text-align: left;
   margin-bottom: 40px;
+  margin-top: 5px;
+}
+
+tr {
+  height: 10px;
+}
+
+.number {
+  text-align: right;
 }
 
 .total-expense {
   align-self: end;
   margin-right: 1rem;
   margin-bottom: 40px;
+}
+
+.hidden {
+  display: none;
 }

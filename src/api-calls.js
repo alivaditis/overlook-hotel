@@ -3,7 +3,16 @@ import { rooms } from "./scripts"
 const getUserBookings = (userId) => {
   return fetch("http://localhost:3001/api/v1/bookings")
     .then(response => response.json())
-    .then(data => data.bookings.filter(booking => booking.userID === userId))
+    .then(data => {
+        return data.bookings.filter(booking => booking.userID === userId)
+      })
+}
+
+
+const getAllBookings = () => {
+  return fetch("http://localhost:3001/api/v1/bookings")
+    .then(response => response.json())
+    .then(data => data.bookings)
 }
 
 const getBookingInfo = (userId) => {
@@ -13,6 +22,7 @@ const getBookingInfo = (userId) => {
         const room = rooms.find(r => r.number === booking.roomNumber)
         return {
           date: booking.date,
+          roomNumber: room.roomNumber,
           roomType: room.roomType,
           bidet: room.bidet,
           bedSize: room.bedSize,
@@ -39,4 +49,17 @@ const getRooms = () => {
   .then(data => data.rooms)
 }
 
-export { getUserBookings, getRooms, getBookingInfo, getCostsPerNight }
+const postRoomBooking = (userId, date, roomNumber) => {
+  return fetch('http://localhost:3001/api/v1/bookings	', {
+    method: 'POST',
+    body: JSON.stringify({
+      "userID": parseInt(userId), 
+      "date": date, 
+      "roomNumber": parseInt(roomNumber)
+    }),
+    headers: { 'Content-Type': 'application/json' }
+  })
+  .catch(err => console.log("ERROR", err));
+}
+
+export { getAllBookings, getUserBookings, getRooms, getBookingInfo, getCostsPerNight, postRoomBooking }
