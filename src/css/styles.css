@@ -155,19 +155,28 @@ h1:hover {
 
 /* BOOK NOW */
 
+.book-container {
+  display: flex;
+  justify-content: center;
+}
+
+.book {
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+}
+
 #date-select {
-  margin:80px 80px 40px;
+  align-self: flex-start;
+  margin: 40px 0 0;
 }
 
 .book-now-table {
-  width: 60%;
   border-collapse: collapse;
 }
 
 .book-now {
   margin-bottom: 40px;
-  display: flex;
-  justify-content: center;
 }
 
 .please-select-message {
