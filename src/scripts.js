@@ -7,6 +7,7 @@ import './css/styles.css';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 
 import flatpickr from "flatpickr";
+import 'select-pure/dist/index.js';
 import { calculateExpense, seperateUpcomingPast, sortByDate, filterBookingsByDate, filterBookedRooms } from './bookings';
 import { getUserBookings, getBookingInfo, getRooms, getCostsPerNight, getAllBookings, postRoomBooking } from './api-calls';
 import { renderAvailableRooms, renderBookings, renderTotalExpense, renderTableHeader } from './dom-updates'

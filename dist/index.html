@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Webpack Starter Kit</title>
   <style>
+    @import url('https://unpkg.com/select-pure@latest/dist/index.js');
     @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
     @import url("https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css");
   </style>
@@ -36,6 +37,13 @@
   <div class="book-container">
     <section class="book">
       <input id="date-select" name='date-select' type='text' placeholder="Select a date!">
+      <select-pure name="room-type" id="room-type" multiple>
+        <option-pure value="" disabled hidden>-- Please Select A Room Type --</option-pure>
+        <option-pure value="residential suited">Residential Suite</option-pure>
+        <option-pure value="junior suite">Junior Suite</option-pure>
+        <option-pure value="suite">Suite</option-pure>
+        <option-pure value="single room">Single Room</option-pure>
+      </select-pure>
       <section class="book-now">
         <p class="please-select-message">Please select a date to book a room!</p>
         <h2 class="room-header hidden">Available Rooms</h2>

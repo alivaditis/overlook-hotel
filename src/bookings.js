@@ -35,4 +35,15 @@ const filterBookedRooms = (rooms, bookedRooms) => {
   })
 }
 
-export { calculateExpense, seperateUpcomingPast, sortByDate, filterBookingsByDate, filterBookedRooms }
+const filterByRoomType = (roomTypes, availableRooms) => {
+  if (!availableRooms.length) {
+    return `No ${roomTypes.join(" or ")}s available for the selected date!`;
+  }
+  const filteredRooms = availableRooms.filter(r => roomTypes.includes(r.roomType))
+  if (!filteredRooms.length) {
+    return `No ${roomTypes.join(" or ")}s available for the selected date!`;
+  }
+  return filteredRooms
+}
+
+export { calculateExpense, seperateUpcomingPast, sortByDate, filterBookingsByDate, filterBookedRooms, filterByRoomType }

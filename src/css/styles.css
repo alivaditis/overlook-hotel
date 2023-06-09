@@ -150,7 +150,8 @@ h1:hover {
 /* OVERVIEW */
 
 .overview {
-  background-color: black;
+  background-color: #EB0000;
+  color: #EB0000;
 }
 
 /* BOOK NOW */

@@ -30,6 +30,14 @@ const sampleRooms = [
   "bedSize": "queen",
   "numBeds": 2,
   "costPerNight": 340.17
+  },
+  {
+    "number": 17,
+    "roomType": "junior suite",
+    "bidet": false,
+    "bedSize": "twin",
+    "numBeds": 2,
+    "costPerNight": 328.15
   }
 ]
 
