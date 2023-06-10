@@ -156,13 +156,13 @@ h1:hover {
 }
 
 .overview-info { 
-  min-width: 40%;
+  min-width: 33.33%;
 }
 
 .overview-img {
   background: url('/src/images/hotel.jpg');
   background-size: cover;
-  min-width: 60%;
+  min-width: 66.66%;
 }
 
 

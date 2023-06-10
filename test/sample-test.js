@@ -1,7 +1,7 @@
 import chai from 'chai';
 import { sampleRooms } from './sample-rooms'
 import { sampleBookings } from './sample-bookings'
-import { calculateExpense, filterByRoomType } from '../src/bookings'
+import { calculateExpense, filterByRoomType,seperateUpcomingPast,sortByDate } from '../src/bookings'
 const expect = chai.expect;
 
 describe('get total expense', function() {
@@ -41,13 +41,41 @@ describe('filter available rooms by type', function() {
   });
 
   it('should filter the available rooms by multiple room types', function() {
-    const singles = filterByRoomType(['single room', 'junior suite'], sampleRooms)
-    expect(singles).to.deep.equal([sampleRooms[1], sampleRooms[2], sampleRooms[3], sampleRooms[4]]);
+    const singlesJuniors = filterByRoomType(['single room', 'junior suite'], sampleRooms)
+    expect(singlesJuniors).to.deep.equal([sampleRooms[1], sampleRooms[2], sampleRooms[3], sampleRooms[4]]);
   });
 
   it('should return a message if there are no available rooms of that type', function() {
     const resSuites = filterByRoomType(['residential suite'], sampleRooms)
     expect(resSuites).to.deep.equal(`No residential suites available for the selected date!`);
+  });
+
+});
+
+describe('sort bookings by date', function() {
+
+  it('should be able to sort the bookings by most recent to furthest past date', function() {
+    const sorted = sortByDate(sampleBookings, 'recent-past')
+    expect(sorted).to.deep.equal([sampleBookings[4], sampleBookings[0],sampleBookings[3] ,sampleBookings[1], sampleBookings[2]]);
+  });
+
+  it('should be able to sort the bookings by furthest past to most recent date', function() {
+    const sorted = sortByDate(sampleBookings, 'past-recent')
+    expect(sorted).to.deep.equal([sampleBookings[2],sampleBookings[1] ,sampleBookings[3], sampleBookings[0], sampleBookings[4]]);
+  });
+
+});
+
+describe('seperate bookings by upcoming or past', function() {
+
+  it('should be able to seperate bookings into upocoming and past groups', function() {
+    const sorted = seperateUpcomingPast(sampleBookings)
+    expect(sorted).to.deep.equal({upcoming: [sampleBookings[4]], past: [sampleBookings[0], sampleBookings[1], sampleBookings[2], sampleBookings[3]]});
+  });
+
+  it('should be able to seperate bookings into upocoming and past groups for a different set of data', function() {
+    const sorted = seperateUpcomingPast([sampleBookings[0], sampleBookings[1]])
+    expect(sorted).to.deep.equal({upcoming: [], past: [sampleBookings[0], sampleBookings[1]]});
   });
 
 });

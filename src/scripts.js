@@ -31,7 +31,7 @@ const fp =  flatpickr(dateSelect, {
 // GLOBAL VARIABLES
 
 let rooms
-const userId = 8
+const userId = 24
 
 // EVENT LISTENERS
 
@@ -83,8 +83,8 @@ const displayUserBookings = () => {
     const seperated = seperateUpcomingPast(result)
     renderTableHeader(pastHeader, seperated.past, true)
     renderTableHeader(upcomingHeader, seperated.upcoming, false)
-    renderBookings(upcomingTable, sortByDate(seperated.upcoming))
-    renderBookings(pastTable, sortByDate(seperated.past))
+    renderBookings(upcomingTable, sortByDate(seperated.upcoming, 'past-recent'))
+    renderBookings(pastTable, sortByDate(seperated.past, 'recent-past'))
   })
   getCostsPerNight(userId)
     .then(result => renderTotalExpense(totalDisplay, calculateExpense(result)))
