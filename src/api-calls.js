@@ -1,17 +1,17 @@
 import { rooms } from "./scripts"
 
-const getAllBookings = () => {
-  return fetch("http://localhost:3001/api/v1/bookings")
-    .then(response => response.json())
-    .then(data => data.bookings)
-    .catch(err => console.log("ERROR", err));
-}
-
 const getRooms = () => {
   return fetch("http://localhost:3001/api/v1/rooms")
   .then(response => response.json())
   .then(data => data.rooms)
   .catch(err => console.log("ERROR", err));
+}
+
+const getAllBookings = () => {
+  return fetch("http://localhost:3001/api/v1/bookings")
+    .then(response => response.json())
+    .then(data => data.bookings)
+    .catch(err => console.log("ERROR", err));
 }
 
 const getUserBookings = (userId) => {

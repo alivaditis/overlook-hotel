@@ -1,7 +1,7 @@
 import chai from 'chai';
 import { sampleRooms } from './sample-rooms'
 import { sampleBookings } from './sample-bookings'
-import { calculateExpense, filterBookingsByDate, filterByRoomType,seperateUpcomingPast,sortByDate } from '../src/bookings'
+import { calculateExpense, filterBookedRooms, filterBookingsByDate, filterByRoomType,seperateUpcomingPast,sortByDate } from '../src/bookings'
 const expect = chai.expect;
 
 describe('get total expense', function() {
@@ -89,13 +89,33 @@ describe('get room numbers available by specified date', function() {
   });
 
   it('should return the room numbers of rooms are booked for a specific date', function() {
-    const availableRooms = filterBookingsByDate('2022/01/10',sampleBookings)
-    expect(availableRooms).to.deep.equal([4])
+    const bookedRooms = filterBookingsByDate('2022/01/10',sampleBookings)
+    expect(bookedRooms).to.deep.equal([4])
   });
 
   it('should return the room numbers of rooms are booked for a different date', function() {
-    const availableRooms = filterBookingsByDate('2023/12/14',sampleBookings)
-    expect(availableRooms).to.deep.equal([17])
+    const bookedRooms = filterBookingsByDate('2023/12/14',sampleBookings)
+    expect(bookedRooms).to.deep.equal([17])
   });
 
-}); 
+});
+
+describe('get room numbers available by specified date', function() {
+
+  let rooms
+  
+  beforeEach(() => {
+    rooms = sampleRooms
+  });
+
+  it('should return the room numbers of rooms are booked for a specific date', function() {
+    const availableRooms = filterBookedRooms(rooms, [2, 3])
+    expect(availableRooms).to.deep.equal([rooms[2], rooms[3], rooms[4]])
+  });
+
+  it('should return the room numbers of rooms are booked for a specific date', function() {
+    const availableRooms = filterBookedRooms(rooms, [4, 5, 17])
+    expect(availableRooms).to.deep.equal([rooms[0], rooms[1]])
+  });
+
+});
