@@ -32,18 +32,22 @@
     </article>
   </section>
   <section class="overview">
-    Welcome to Overlook Alpine Haven Spa Hotel, a captivating destination nestled in the enchanting village of Zermatt, Switzerland. As part of the renowned Overlook Hotels collection, our retreat offers a luxurious getaway experience in the heart of the Swiss Alps. Immerse yourself in breathtaking landscapes and panoramic mountain views of the iconic Matterhorn from our cozy accommodations. Indulge in our world-class spa and wellness facilities, where rejuvenation and relaxation await. Delight your senses with exquisite dining experiences, showcasing the finest locally sourced ingredients. Embark on adventures through hiking trails, skiing on world-class slopes, or leisurely activities like helicopter rides, all within the picturesque setting of Zermatt. Whether you're planning an exclusive event or seeking a personal retreat, Overlook Alpine Haven Spa Hotel promises an unforgettable Alpine escape, providing the perfect blend of serenity, indulgence, and warm hospitality, synonymous with the Overlook Hotels name.
+    <section class="overview-info">
+      Welcome to Overlook Alpine Haven Spa Hotel, a captivating destination nestled in the enchanting village of Zermatt, Switzerland. As part of the renowned Overlook Hotels collection, our retreat offers a luxurious getaway experience in the heart of the Swiss Alps. Immerse yourself in breathtaking landscapes and panoramic mountain views of the iconic Matterhorn from our cozy accommodations. Indulge in our world-class spa and wellness facilities, where rejuvenation and relaxation await. Delight your senses with exquisite dining experiences, showcasing the finest locally sourced ingredients. Embark on adventures through hiking trails, skiing on world-class slopes, or leisurely activities like helicopter rides, all within the picturesque setting of Zermatt. Whether you're planning an exclusive event or seeking a personal retreat, Overlook Alpine Haven Spa Hotel promises an unforgettable Alpine escape, providing the perfect blend of serenity, indulgence, and warm hospitality, synonymous with the Overlook Hotels name.
+    </section>
+    <div class="overview-img"></div>
   </section>
   <div class="book-container">
     <section class="book">
-      <input id="date-select" name='date-select' type='text' placeholder="Select a date!">
-      <select-pure name="room-type" id="room-type"  disabled multiple>
-        <option-pure value="" disabled hidden>-- Please Select A Room Type --</option-pure>
-        <option-pure value="residential suite">Residential Suite</option-pure>
-        <option-pure value="junior suite">Junior Suite</option-pure>
-        <option-pure value="suite">Suite</option-pure>
-        <option-pure value="single room">Single Room</option-pure>
-      </select-pure>
+      <div class="inputs-container">
+        <input id="date-select" name='date-select' type='text' placeholder="Select a date!">
+        <select-pure name="room-type" id="room-type"  default-label='Select room types' disabled multiple>
+          <option-pure value="residential suite">Residential Suite</option-pure>
+          <option-pure value="junior suite">Junior Suite</option-pure>
+          <option-pure value="suite">Suite</option-pure>
+          <option-pure value="single room">Single Room</option-pure>
+        </select-pure>
+      </div>
       <section class="book-now">
         <p class="please-select-message">Please select a date to book a room!</p>
         <h2 class="room-header hidden">Available Rooms</h2>

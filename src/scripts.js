@@ -23,7 +23,6 @@ const totalDisplay = document.querySelector('.total-expense')
 const upcomingHeader = document.querySelector('.upcoming-header')
 const pastHeader = document.querySelector('.past-header')
 const dateSelect = document.querySelector('#date-select')
-const clickMe = document.querySelector('.click-me')
 const roomTypeSelect = document.querySelector('select-pure')
 const fp =  flatpickr(dateSelect, {
   dateFormat: "Y/m/d"
@@ -40,17 +39,7 @@ window.addEventListener('load', () => {
   getRooms()
     .then(result => {
       rooms = result  
-      getBookingInfo(userId)
-        .then(result => {
-          const seperated = seperateUpcomingPast(result)
-          renderTableHeader(pastHeader, seperated.past, true)
-          renderTableHeader(upcomingHeader, seperated.upcoming, false)
-          renderBookings(upcomingTable, sortByDate(seperated.upcoming))
-          renderBookings(pastTable, sortByDate(seperated.past))
-        })
-
-        getCostsPerNight(userId)
-          .then(result => renderTotalExpense(totalDisplay, calculateExpense(result)))
+      displayUserBookings()
     })
 
 })
@@ -83,18 +72,22 @@ const displayAvailableRooms = () => {
 const bookRoom = () => {
   postRoomBooking(userId, dateSelect.value, event.target.parentNode.id)
   .then(result => {
-  getBookingInfo(userId)
-    .then(result => {
-        const seperated = seperateUpcomingPast(result)
-        renderTableHeader(pastHeader, seperated.past, true)
-        renderTableHeader(upcomingHeader, seperated.upcoming, false)
-        renderBookings(upcomingTable, sortByDate(seperated.upcoming))
-        renderBookings(pastTable, sortByDate(seperated.past))
-      })
-  getCostsPerNight(userId)
-    .then(result => renderTotalExpense(totalDisplay, calculateExpense(result)))
+  displayUserBookings()
   displayAvailableRooms()
   })
+}
+
+const displayUserBookings = () => {
+  getBookingInfo(userId)
+  .then(result => {
+    const seperated = seperateUpcomingPast(result)
+    renderTableHeader(pastHeader, seperated.past, true)
+    renderTableHeader(upcomingHeader, seperated.upcoming, false)
+    renderBookings(upcomingTable, sortByDate(seperated.upcoming))
+    renderBookings(pastTable, sortByDate(seperated.past))
+  })
+  getCostsPerNight(userId)
+    .then(result => renderTotalExpense(totalDisplay, calculateExpense(result)))
 }
 
 export { rooms }
