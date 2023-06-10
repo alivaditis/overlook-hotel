@@ -33,6 +33,8 @@ const renderBookings = (tableElement, bookings) => {
 const renderAvailableRooms = (tableElement, rooms) => {
   tableElement.innerHTML = ''
   if (rooms.length) {
+  tableElement.classList.remove('hidden')
+  dateMessage.classList.add('hidden')
   tableElement.innerHTML += `
      <tr>
       <th>Room Type</th>
