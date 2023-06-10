@@ -1,7 +1,7 @@
 import chai from 'chai';
 import { sampleRooms } from './sample-rooms'
 import { sampleBookings } from './sample-bookings'
-import { calculateExpense, filterByRoomType,seperateUpcomingPast,sortByDate } from '../src/bookings'
+import { calculateExpense, filterBookingsByDate, filterByRoomType,seperateUpcomingPast,sortByDate } from '../src/bookings'
 const expect = chai.expect;
 
 describe('get total expense', function() {
@@ -28,7 +28,7 @@ describe('get total expense', function() {
 
 });
 
-describe('filter available rooms by type', function() {
+describe('filter available rooms by types', function() {
 
   it('should filter the available rooms by room type', function() {
     const suites = filterByRoomType(['suite'], sampleRooms)
@@ -79,3 +79,23 @@ describe('seperate bookings by upcoming or past', function() {
   });
 
 });
+
+describe('get room numbers available by specified date', function() {
+
+  let rooms
+  
+  beforeEach(() => {
+    rooms = sampleRooms
+  });
+
+  it('should return the room numbers of rooms are booked for a specific date', function() {
+    const availableRooms = filterBookingsByDate('2022/01/10',sampleBookings)
+    expect(availableRooms).to.deep.equal([4])
+  });
+
+  it('should return the room numbers of rooms are booked for a different date', function() {
+    const availableRooms = filterBookingsByDate('2023/12/14',sampleBookings)
+    expect(availableRooms).to.deep.equal([17])
+  });
+
+}); 

@@ -1,18 +1,25 @@
 import { rooms } from "./scripts"
 
-const getUserBookings = (userId) => {
-  return fetch("http://localhost:3001/api/v1/bookings")
-    .then(response => response.json())
-    .then(data => {
-        return data.bookings.filter(booking => booking.userID === userId)
-      })
-}
-
-
 const getAllBookings = () => {
   return fetch("http://localhost:3001/api/v1/bookings")
     .then(response => response.json())
     .then(data => data.bookings)
+    .catch(err => console.log("ERROR", err));
+}
+
+const getRooms = () => {
+  return fetch("http://localhost:3001/api/v1/rooms")
+  .then(response => response.json())
+  .then(data => data.rooms)
+  .catch(err => console.log("ERROR", err));
+}
+
+const getUserBookings = (userId) => {
+  return getAllBookings()
+    .then(data => {
+      return data.filter(booking => booking.userID === userId)
+      })
+    .catch(err => console.log("ERROR", err));
 }
 
 const getBookingInfo = (userId) => {
@@ -31,6 +38,7 @@ const getBookingInfo = (userId) => {
         }
       })
     })
+    .catch(err => console.log("ERROR", err));
 }
 
 const getCostsPerNight = (userId) => {
@@ -41,13 +49,9 @@ const getCostsPerNight = (userId) => {
         .costPerNight
       })
     })
+    .catch(err => console.log("ERROR", err));
 }
 
-const getRooms = () => {
-  return fetch("http://localhost:3001/api/v1/rooms")
-  .then(response => response.json())
-  .then(data => data.rooms)
-}
 
 const postRoomBooking = (userId, date, roomNumber) => {
   return fetch('http://localhost:3001/api/v1/bookings	', {
