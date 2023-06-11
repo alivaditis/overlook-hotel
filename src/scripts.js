@@ -31,7 +31,7 @@ const fp =  flatpickr(dateSelect, {
 // GLOBAL VARIABLES
 
 let rooms
-const userId = 24
+const userId = 6
 
 // EVENT LISTENERS
 

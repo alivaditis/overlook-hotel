@@ -1,8 +1,56 @@
 import chai from 'chai';
 import { sampleRooms } from './sample-rooms'
 import { sampleBookings } from './sample-bookings'
-import { calculateExpense, filterBookedRooms, filterBookingsByDate, filterByRoomType,seperateUpcomingPast,sortByDate } from '../src/bookings'
+import { filterBookingsByUser, calculateExpense, filterBookedRooms, filterBookingsByDate, filterByRoomType, seperateUpcomingPast,sortByDate } from '../src/bookings'
 const expect = chai.expect;
+
+describe('filter bookings by userId', function() {
+
+  it('should be able to filter bookings by a customer id', function() {
+    const customerBookings = filterBookingsByUser(sampleBookings, 9)
+    expect(customerBookings).to.deep.equal([sampleBookings[0]])
+  })
+
+  it('should be able to filter bookings by a different customer id', function() {
+    const customerBookings = filterBookingsByUser(sampleBookings, 43)
+    expect(customerBookings).to.deep.equal([sampleBookings[1]])
+  })
+
+  it('should be able to return more than one booking by a customer id', function() {
+    const customerBookings = filterBookingsByUser(sampleBookings, 20)
+    expect(customerBookings).to.deep.equal([sampleBookings[3], sampleBookings[4]])
+  })
+
+  it('should be return an empty array if no bookings are found for user', function() {
+    const customerBookings = filterBookingsByUser(sampleBookings, 1)
+    expect(customerBookings).to.deep.equal([])
+  })
+
+});
+
+describe('retrieve room info by room number', function() {
+
+  it('should be able to filter bookings by a customer id', function() {
+    const customerBookings = filterBookingsByUser(sampleBookings, 9)
+    expect(customerBookings).to.deep.equal([sampleBookings[0]])
+  })
+
+  it('should be able to filter bookings by a different customer id', function() {
+    const customerBookings = filterBookingsByUser(sampleBookings, 43)
+    expect(customerBookings).to.deep.equal([sampleBookings[1]])
+  })
+
+  it('should be able to return more than one booking by a customer id', function() {
+    const customerBookings = filterBookingsByUser(sampleBookings, 20)
+    expect(customerBookings).to.deep.equal([sampleBookings[3], sampleBookings[4]])
+  })
+
+  it('should be return an empty array if no bookings are found for user', function() {
+    const customerBookings = filterBookingsByUser(sampleBookings, 1)
+    expect(customerBookings).to.deep.equal([])
+  })
+
+});
 
 describe('get total expense', function() {
   let expenseList

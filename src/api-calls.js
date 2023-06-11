@@ -1,3 +1,4 @@
+import { filterBookingsByUser, getRoomByNumber } from "./bookings";
 import { rooms } from "./scripts"
 
 const getRooms = () => {
@@ -16,8 +17,8 @@ const getAllBookings = () => {
 
 const getUserBookings = (userId) => {
   return getAllBookings()
-    .then(data => {
-      return data.filter(booking => booking.userID === userId)
+    .then(bookings => {
+      return filterBookingsByUser(bookings, userId)
       })
     .catch(err => console.log("ERROR", err));
 }
@@ -26,7 +27,7 @@ const getBookingInfo = (userId) => {
   return getUserBookings(userId)
     .then(filtered => {
       return filtered.map(booking => {
-        const room = rooms.find(r => r.number === booking.roomNumber)
+        const room = getRoomByNumber(booking.roomNumber, rooms)
         return {
           date: booking.date,
           roomNumber: room.roomNumber,
@@ -45,7 +46,7 @@ const getCostsPerNight = (userId) => {
   return getUserBookings(userId)
     .then(result => {
       return result.map(booking => {
-        return rooms.find(r => r.number === booking.roomNumber)
+        return getRoomByNumber(booking.roomNumber, rooms)
         .costPerNight
       })
     })

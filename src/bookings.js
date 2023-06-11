@@ -1,3 +1,11 @@
+const filterBookingsByUser = (bookings, userId) => {
+  return bookings.filter(booking => booking.userID === userId)
+}
+
+const getRoomByNumber = (roomNumber, rooms) => {
+  return rooms.find(r => r.number === roomNumber);
+};
+
 const calculateExpense = (expenseList) => {
   if (!expenseList.length) {
     return 'Please book some rooms!'
@@ -50,4 +58,6 @@ const filterByRoomType = (roomTypes, availableRooms) => {
   return filteredRooms
 }
 
-export { calculateExpense, seperateUpcomingPast, sortByDate, filterBookingsByDate, filterBookedRooms, filterByRoomType }
+
+
+export { calculateExpense, seperateUpcomingPast, sortByDate, filterBookingsByDate, filterBookedRooms, filterByRoomType, filterBookingsByUser, getRoomByNumber }
