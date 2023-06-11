@@ -3,7 +3,11 @@ const filterBookingsByUser = (bookings, userId) => {
 }
 
 const getRoomByNumber = (roomNumber, rooms) => {
-  return rooms.find(r => r.number === roomNumber);
+  const room = rooms.find(r => r.number === roomNumber);
+  if (!room) {
+    return 'No room exists for that room number'
+  }
+  return room
 };
 
 const calculateExpense = (expenseList) => {

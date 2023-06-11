@@ -1,7 +1,7 @@
 import chai from 'chai';
 import { sampleRooms } from './sample-rooms'
 import { sampleBookings } from './sample-bookings'
-import { filterBookingsByUser, calculateExpense, filterBookedRooms, filterBookingsByDate, filterByRoomType, seperateUpcomingPast,sortByDate } from '../src/bookings'
+import { filterBookingsByUser, calculateExpense, filterBookedRooms, filterBookingsByDate, filterByRoomType, seperateUpcomingPast,sortByDate, getRoomByNumber } from '../src/bookings'
 const expect = chai.expect;
 
 describe('filter bookings by userId', function() {
@@ -28,26 +28,28 @@ describe('filter bookings by userId', function() {
 
 });
 
+
 describe('retrieve room info by room number', function() {
 
-  it('should be able to filter bookings by a customer id', function() {
-    const customerBookings = filterBookingsByUser(sampleBookings, 9)
-    expect(customerBookings).to.deep.equal([sampleBookings[0]])
+  let rooms
+  
+  beforeEach(() => {
+    rooms = sampleRooms
+  });
+
+  it('should return a room object by matching its room number', function() {
+    const room = getRoomByNumber(2, sampleRooms)
+    expect(room).to.deep.equal(sampleRooms[0])
   })
 
-  it('should be able to filter bookings by a different customer id', function() {
-    const customerBookings = filterBookingsByUser(sampleBookings, 43)
-    expect(customerBookings).to.deep.equal([sampleBookings[1]])
+  it('should return a different room object by matching its room number', function() {
+    const room = getRoomByNumber(3, sampleRooms)
+    expect(room).to.deep.equal(sampleRooms[1])
   })
 
-  it('should be able to return more than one booking by a customer id', function() {
-    const customerBookings = filterBookingsByUser(sampleBookings, 20)
-    expect(customerBookings).to.deep.equal([sampleBookings[3], sampleBookings[4]])
-  })
-
-  it('should be return an empty array if no bookings are found for user', function() {
-    const customerBookings = filterBookingsByUser(sampleBookings, 1)
-    expect(customerBookings).to.deep.equal([])
+  it('should return a message if room does not exist', function() {
+    const room = getRoomByNumber(999, sampleRooms)
+    expect(room).to.equal('No room exists for that room number');
   })
 
 });
@@ -128,7 +130,7 @@ describe('seperate bookings by upcoming or past', function() {
 
 });
 
-describe('get room numbers available by specified date', function() {
+describe('get room numbers of booked rooms by specified date', function() {
 
   let rooms
   
@@ -148,7 +150,7 @@ describe('get room numbers available by specified date', function() {
 
 });
 
-describe('get room numbers available by specified date', function() {
+describe('get rooms available by specified date', function() {
 
   let rooms
   
