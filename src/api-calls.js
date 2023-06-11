@@ -1,25 +1,33 @@
+import { filterBookingsByUser, getRoomByNumber } from "./bookings";
 import { rooms } from "./scripts"
 
-const getUserBookings = (userId) => {
-  return fetch("http://localhost:3001/api/v1/bookings")
-    .then(response => response.json())
-    .then(data => {
-        return data.bookings.filter(booking => booking.userID === userId)
-      })
+const getRooms = () => {
+  return fetch("http://localhost:3001/api/v1/rooms")
+  .then(response => response.json())
+  .then(data => data.rooms)
+  .catch(err => console.log("ERROR", err));
 }
-
 
 const getAllBookings = () => {
   return fetch("http://localhost:3001/api/v1/bookings")
     .then(response => response.json())
     .then(data => data.bookings)
+    .catch(err => console.log("ERROR", err));
+}
+
+const getUserBookings = (userId) => {
+  return getAllBookings()
+    .then(bookings => {
+      return filterBookingsByUser(bookings, userId)
+      })
+    .catch(err => console.log("ERROR", err));
 }
 
 const getBookingInfo = (userId) => {
   return getUserBookings(userId)
     .then(filtered => {
       return filtered.map(booking => {
-        const room = rooms.find(r => r.number === booking.roomNumber)
+        const room = getRoomByNumber(booking.roomNumber, rooms)
         return {
           date: booking.date,
           roomNumber: room.roomNumber,
@@ -31,23 +39,20 @@ const getBookingInfo = (userId) => {
         }
       })
     })
+    .catch(err => console.log("ERROR", err));
 }
 
 const getCostsPerNight = (userId) => {
   return getUserBookings(userId)
     .then(result => {
       return result.map(booking => {
-        return rooms.find(r => r.number === booking.roomNumber)
+        return getRoomByNumber(booking.roomNumber, rooms)
         .costPerNight
       })
     })
+    .catch(err => console.log("ERROR", err));
 }
 
-const getRooms = () => {
-  return fetch("http://localhost:3001/api/v1/rooms")
-  .then(response => response.json())
-  .then(data => data.rooms)
-}
 
 const postRoomBooking = (userId, date, roomNumber) => {
   return fetch('http://localhost:3001/api/v1/bookings	', {

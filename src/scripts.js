@@ -7,7 +7,8 @@ import './css/styles.css';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 
 import flatpickr from "flatpickr";
-import { calculateExpense, seperateUpcomingPast, sortByDate, filterBookingsByDate, filterBookedRooms } from './bookings';
+import 'select-pure/dist/index.js';
+import { calculateExpense, seperateUpcomingPast, sortByDate, filterBookingsByDate, filterBookedRooms, filterByRoomType } from './bookings';
 import { getUserBookings, getBookingInfo, getRooms, getCostsPerNight, getAllBookings, postRoomBooking } from './api-calls';
 import { renderAvailableRooms, renderBookings, renderTotalExpense, renderTableHeader } from './dom-updates'
 
@@ -22,7 +23,7 @@ const totalDisplay = document.querySelector('.total-expense')
 const upcomingHeader = document.querySelector('.upcoming-header')
 const pastHeader = document.querySelector('.past-header')
 const dateSelect = document.querySelector('#date-select')
-const clickMe = document.querySelector('.click-me')
+const roomTypeSelect = document.querySelector('select-pure')
 const fp =  flatpickr(dateSelect, {
   dateFormat: "Y/m/d"
 });
@@ -30,7 +31,7 @@ const fp =  flatpickr(dateSelect, {
 // GLOBAL VARIABLES
 
 let rooms
-const userId = 8
+const userId = 6
 
 // EVENT LISTENERS
 
@@ -38,52 +39,55 @@ window.addEventListener('load', () => {
   getRooms()
     .then(result => {
       rooms = result  
-      getBookingInfo(userId)
-        .then(result => {
-          const seperated = seperateUpcomingPast(result)
-          renderTableHeader(pastHeader, seperated.past, true)
-          renderTableHeader(upcomingHeader, seperated.upcoming, false)
-          renderBookings(upcomingTable, sortByDate(seperated.upcoming))
-          renderBookings(pastTable, sortByDate(seperated.past))
-        })
-
-        getCostsPerNight(userId)
-          .then(result => renderTotalExpense(totalDisplay, calculateExpense(result)))
+      displayUserBookings()
     })
 
 })
 
 dateSelect.addEventListener('change', (event) => {
-  getAllBookings()
-    .then(result => filterBookingsByDate((`${dateSelect.value}`),result))
-    .then(bookedRooms => filterBookedRooms(rooms, bookedRooms))
-    .then(availableRooms => renderAvailableRooms(bookNowTable, availableRooms))
+  displayAvailableRooms()
+})
+
+roomTypeSelect.addEventListener('change', (event) => {
+  displayAvailableRooms()
 })
 
 bookNowTable.addEventListener('click', (event) => {
   if(event.target.classList.contains('click-me')) {
-    console.log('clicked!', event.target.parentNode.id)
-    // console.log(`userid: userId}, date: ${dateSelect.value}, ${event.target.parentNode.id}`)
-    postRoomBooking(userId, dateSelect.value, event.target.parentNode.id)
-      .then(result => {
-      getBookingInfo(userId)
-        .then(result => {
-            const seperated = seperateUpcomingPast(result)
-            renderTableHeader(pastHeader, seperated.past, true)
-            renderTableHeader(upcomingHeader, seperated.upcoming, false)
-            renderBookings(upcomingTable, sortByDate(seperated.upcoming))
-            renderBookings(pastTable, sortByDate(seperated.past))
-          })
-      getCostsPerNight(userId)
-        .then(result => renderTotalExpense(totalDisplay, calculateExpense(result)))
-      getAllBookings()
-          .then(result => filterBookingsByDate((`${dateSelect.value}`),result))
-          .then(bookedRooms => filterBookedRooms(rooms, bookedRooms))
-          .then(availableRooms => renderAvailableRooms(bookNowTable, availableRooms))
-      })
+    bookRoom()
   }
 })
 
+// Functions
 
+const displayAvailableRooms = () => {
+  getAllBookings()
+  .then(result => filterBookingsByDate((`${dateSelect.value}`),result))
+  .then(bookedRooms => filterBookedRooms(rooms, bookedRooms))
+  .then(availableRooms => filterByRoomType(roomTypeSelect.values, availableRooms))
+  .then(filteredRooms => renderAvailableRooms(bookNowTable, filteredRooms))
+  roomTypeSelect.enable()
+}
+
+const bookRoom = () => {
+  postRoomBooking(userId, dateSelect.value, event.target.parentNode.id)
+  .then(result => {
+  displayUserBookings()
+  displayAvailableRooms()
+  })
+}
+
+const displayUserBookings = () => {
+  getBookingInfo(userId)
+  .then(result => {
+    const seperated = seperateUpcomingPast(result)
+    renderTableHeader(pastHeader, seperated.past, true)
+    renderTableHeader(upcomingHeader, seperated.upcoming, false)
+    renderBookings(upcomingTable, sortByDate(seperated.upcoming, 'past-recent'))
+    renderBookings(pastTable, sortByDate(seperated.past, 'recent-past'))
+  })
+  getCostsPerNight(userId)
+    .then(result => renderTotalExpense(totalDisplay, calculateExpense(result)))
+}
 
 export { rooms }
