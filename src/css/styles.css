@@ -235,10 +235,14 @@ select-pure {
 }
 .booked-message {
   align-self: center;
-  text-align: left;
-  font-size: 32px;
-  font-weight: 400;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
   margin-top: 80px;
+  background-color: #f0f0f0;
+  padding: 12px;
+  border-radius: 5px;
+  color: #336699;
 }
 
 .room-header {

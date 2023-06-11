@@ -77,7 +77,7 @@ const renderTotalExpense = (element, total) => {
 }
 
 const renderBookingConfirmation = (roomNumber, userId, date) => {
-  bookedMessage.innerText = `Booking confirmation:\n 
+  bookedMessage.innerText = `Booking Confirmed!\n 
     UserId: ${userId}\n
     Room Number: ${roomNumber}\n
     Date: ${date}`
