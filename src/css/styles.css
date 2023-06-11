@@ -37,6 +37,11 @@ p, h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 /* Landing */
 
 .landing {
@@ -49,7 +54,7 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 nav {
-  height: 10dvh;
+  height: 8dvh;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -185,6 +190,7 @@ h1:hover {
 }
 
 select-pure {
+  --disabled-color: black;
   width: 100%;
   border-width: 1px;
   text-align: center;

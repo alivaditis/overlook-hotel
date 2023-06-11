@@ -13,11 +13,11 @@
 </head>
 <body>
   <aside class="scroll-nav-container">
-    <ul class="scroll-nav" role="nav">
-      <li class="nav-item">Overview</li>
-      <li class="nav-item">Book Now</li>
-      <li class="nav-item">Your Bookings</li>
-    </ul>
+    <nav class="scroll-nav">
+      <a href="#overview" class="nav-item">Overview</a>
+      <a href="#book" class="nav-item">Book Now</a>
+      <a href="#user-dashboard" class="nav-item">Your Bookings</a>
+    </nav>
   </aside>
   <section class="landing">
     <nav>
@@ -31,14 +31,14 @@
       <h2 class="location">Alpine Haven Spa Hotel</h2>
     </article>
   </section>
-  <section class="overview">
+  <section class="overview" id="overview">
     <section class="overview-info">
       Welcome to Overlook Alpine Haven Spa Hotel, a captivating destination nestled in the enchanting village of Zermatt, Switzerland. As part of the renowned Overlook Hotels collection, our retreat offers a luxurious getaway experience in the heart of the Swiss Alps. Immerse yourself in breathtaking landscapes and panoramic mountain views of the iconic Matterhorn from our cozy accommodations. Indulge in our world-class spa and wellness facilities, where rejuvenation and relaxation await. Delight your senses with exquisite dining experiences, showcasing the finest locally sourced ingredients. Embark on adventures through hiking trails, skiing on world-class slopes, or leisurely activities like helicopter rides, all within the picturesque setting of Zermatt. Whether you're planning an exclusive event or seeking a personal retreat, Overlook Alpine Haven Spa Hotel promises an unforgettable Alpine escape, providing the perfect blend of serenity, indulgence, and warm hospitality, synonymous with the Overlook Hotels name.
     </section>
     <div class="overview-img"></div>
   </section>
   <div class="book-container">
-    <section class="book">
+    <section class="book" id="book">
       <div class="inputs-container">
         <div class="date-container">
           <label for="date-select" class="date-label">Select a date:</label>
@@ -52,7 +52,7 @@
         </select-pure>
       </div>
       <section class="book-now">
-        <p class="please-select-message">Please select a date to book a room!</p>
+        <h2 class="please-select-message">Please select a date to book a room.</h2>
         <h2 class="room-header hidden">Available Rooms</h2>
         <p class="date-message hidden">No rooms availbale for that date!  Please try another date!</p>
         <table class="book-now-table">
@@ -60,7 +60,7 @@
       </section>
     </section>
   </div>
-  <section class="user-dashboard">
+  <section class="user-dashboard" id="user-dashboard">
     <div class="dashboard-container">
       <div class="table-container">
         <section class="upcoming">
