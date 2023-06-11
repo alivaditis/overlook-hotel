@@ -40,7 +40,10 @@
   <div class="book-container">
     <section class="book">
       <div class="inputs-container">
-        <input id="date-select" name='date-select' type='text' placeholder="Select a date!">
+        <div class="date-container">
+          <label for="date-select" class="date-label">Select a date:</label>
+          <input id="date-select" name='date-select' type='text'>
+        </div>
         <select-pure name="room-type" id="room-type"  default-label='Select room types' disabled multiple>
           <option-pure value="residential suite">Residential Suite</option-pure>
           <option-pure value="junior suite">Junior Suite</option-pure>
