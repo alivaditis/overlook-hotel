@@ -233,6 +233,13 @@ select-pure {
   font-weight: 700;
   margin-top: 80px;
 }
+.booked-message {
+  align-self: center;
+  text-align: left;
+  font-size: 32px;
+  font-weight: 400;
+  margin-top: 80px;
+}
 
 .room-header {
   color: #EB0000;

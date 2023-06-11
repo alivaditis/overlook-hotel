@@ -1,6 +1,8 @@
 const dateMessage = document.querySelector('.date-message')
 const pleaseSelect = document.querySelector('.please-select-message')
 const roomHeader = document.querySelector('.room-header')
+const bookedMessage = document.querySelector('.booked-message')
+const bookNow = document.querySelector('.book-now')
 
 const renderBookings = (tableElement, bookings) => {
   tableElement.innerHTML = ''
@@ -32,7 +34,10 @@ const renderBookings = (tableElement, bookings) => {
 
 const renderAvailableRooms = (tableElement, rooms) => {
   tableElement.innerHTML = ''
-  if (rooms.length) {
+  if (!rooms.length  || !Array.isArray(rooms))  {
+    tableElement.classList.add('hidden')
+    dateMessage.classList.remove('hidden')
+  } else {
   tableElement.classList.remove('hidden')
   dateMessage.classList.add('hidden')
   tableElement.innerHTML += `
@@ -55,11 +60,9 @@ const renderAvailableRooms = (tableElement, rooms) => {
     });
     roomHeader.classList.remove('hidden')
     pleaseSelect.classList.add('hidden')
-  } else {
-    tableElement.classList.add('hidden')
-    dateMessage.classList.remove('hidden')
   }
 }
+
 
 const renderTableHeader = (element, bookings, past) => {
   if(past) {
@@ -73,4 +76,19 @@ const renderTotalExpense = (element, total) => {
   element.innerText = `Total Expense: $${total}`
 }
 
-export { renderAvailableRooms, renderBookings, renderTotalExpense, renderTableHeader }
+const renderBookingConfirmation = (roomNumber, userId, date) => {
+  bookedMessage.innerText = `Booking confirmation:\n 
+    UserId: ${userId}\n
+    Room Number: ${roomNumber}\n
+    Date: ${date}`
+  bookNow.classList.add('hidden')
+  bookedMessage.classList.remove('hidden')
+  setTimeout( () => 
+  {
+    bookedMessage.classList.add('hidden');
+    bookNow.classList.remove('hidden')
+  },
+  3000)
+}
+
+export { renderAvailableRooms, renderBookings, renderTotalExpense, renderTableHeader, renderBookingConfirmation }

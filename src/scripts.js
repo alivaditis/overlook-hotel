@@ -10,7 +10,7 @@ import flatpickr from "flatpickr";
 import 'select-pure/dist/index.js';
 import { calculateExpense, seperateUpcomingPast, sortByDate, filterBookingsByDate, filterBookedRooms, filterByRoomType } from './bookings';
 import { getUserBookings, getBookingInfo, getRooms, getCostsPerNight, getAllBookings, postRoomBooking } from './api-calls';
-import { renderAvailableRooms, renderBookings, renderTotalExpense, renderTableHeader } from './dom-updates'
+import { renderAvailableRooms, renderBookings, renderTotalExpense, renderTableHeader, renderBookingConfirmation } from './dom-updates'
 
 console.log('This is the JavaScript entry file - your code begins here.');
 
@@ -44,17 +44,17 @@ window.addEventListener('load', () => {
 
 })
 
-dateSelect.addEventListener('change', (event) => {
+dateSelect.addEventListener('change', () => {
   displayAvailableRooms()
 })
 
-roomTypeSelect.addEventListener('change', (event) => {
+roomTypeSelect.addEventListener('change', () => {
   displayAvailableRooms()
 })
 
-bookNowTable.addEventListener('click', (event) => {
-  if(event.target.classList.contains('click-me')) {
-    bookRoom()
+bookNowTable.addEventListener('click', (e) => {
+  if(e.target.classList.contains('click-me')) {
+    bookRoom(e)
   }
 })
 
@@ -69,11 +69,14 @@ const displayAvailableRooms = () => {
   roomTypeSelect.enable()
 }
 
-const bookRoom = () => {
-  postRoomBooking(userId, dateSelect.value, event.target.parentNode.id)
+const bookRoom = (e) => {
+  const date = dateSelect.value
+  const roomNumber = e.target.parentNode.id
+  postRoomBooking(userId, date, roomNumber)
   .then(result => {
-  displayUserBookings()
-  displayAvailableRooms()
+    displayAvailableRooms()
+    renderBookingConfirmation(roomNumber, userId, date)
+    displayUserBookings()
   })
 }
 
