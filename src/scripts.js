@@ -27,8 +27,11 @@ const roomTypeSelect = document.querySelector('select-pure')
 const signIn = document.querySelector('.sign-in')
 const signInContainer = document.querySelector('.sign-in-container')
 const signInButton = document.querySelector('.sign-in-button')
-const userInput = document.querySelector('#user')
+const userInput = document.querySelector('#username')
 const passwordInput = document.querySelector('#password')
+const userIdErr = document.querySelector('.user-id-error')
+const signedInElements = document.querySelectorAll('.signed-in')
+const avatar = document.querySelector('.sign-in-text')
 const fp =  flatpickr(dateSelect, {
   dateFormat: "Y/m/d"
 });
@@ -36,7 +39,8 @@ const fp =  flatpickr(dateSelect, {
 // GLOBAL VARIABLES
 
 let rooms;
-let userId = 6;
+let userId;
+let userName;
 
 // EVENT LISTENERS
 
@@ -44,7 +48,6 @@ window.addEventListener('load', () => {
   getRooms()
     .then(result => {
       rooms = result  
-      displayUserBookings()
     })
 })
 
@@ -84,9 +87,32 @@ signIn.addEventListener('keydown', (e) => {
 
 signInButton.addEventListener('click', (e) => {
   e.preventDefault()
-  if  (passwordInput.value === 'overlook2021') {
-  const signInId = substring(userInput.value, 8)
+  if  (validatePassword(passwordInput.value) && validateUsername(userInput.value)) {
+  const signInId = userInput.value.substring(8)
+  userIdErr.classList.add('hidden')
   getUser(signInId)
+    .then(data => {
+      userInput.value=''
+      passwordInput.value=''
+      userId = data.id
+      userName = data.name
+      avatar.innerText = `${userName}`
+      signInContainer.classList.add('hidden')
+      displayUserBookings()
+      signedInElements.forEach(element => {
+        element.classList.remove('hidden')
+      })
+    })
+  } else if (!passwordInput.value || !userInput.value) {
+    userIdErr.innerText = 'Not a valid username or password.'
+    userIdErr.classList.remove('hidden')
+    userInput.value=''
+    passwordInput.value=''
+  } else {
+    userIdErr.innerText = 'Username and password do not match.'
+    userIdErr.classList.remove('hidden')
+    userInput.value=''
+    passwordInput.value=''
   }
 })
 
@@ -134,6 +160,19 @@ function handleFocusOut(e) {
 
 const displaySignIn = () => {
   signInContainer.classList.toggle('hidden')
+}
+
+const validateUsername = (username)  => {
+  const pattern = /^customer\d+$/; // regex pattern: starts with 'customer' followed by one or more digits
+  return pattern.test(username);
+}
+
+const validatePassword = (password) => {
+  if(password === 'overlook2021') {
+    return true
+  } else {
+    return false
+  }
 }
 
 export { rooms }
