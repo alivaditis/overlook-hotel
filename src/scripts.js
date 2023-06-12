@@ -24,6 +24,8 @@ const upcomingHeader = document.querySelector('.upcoming-header')
 const pastHeader = document.querySelector('.past-header')
 const dateSelect = document.querySelector('#date-select')
 const roomTypeSelect = document.querySelector('select-pure')
+const signInButton = document.querySelector('.sign-in')
+const signInContainer = document.querySelector('.sign-in-container')
 const fp =  flatpickr(dateSelect, {
   dateFormat: "Y/m/d"
 });
@@ -68,6 +70,16 @@ document.addEventListener('focusout', (e) => {
   handleFocusOut(e)
 });
 
+signInButton.addEventListener('click', (e) => {
+  displaySignIn()
+})
+
+signInButton.addEventListener('keydown', (e) => {
+  if (e.keyCode !== 13) return
+  displaySignIn()
+})
+
+
 
 // Functions
 
@@ -109,6 +121,10 @@ function handleFocusOut(e) {
   if (!roomTypeSelect.contains(focusedElement)) {
     roomTypeSelect.close()  
   }
+}
+
+const displaySignIn = () => {
+  signInContainer.classList.toggle('hidden')
 }
 
 export { rooms }
