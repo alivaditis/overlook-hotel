@@ -124,12 +124,12 @@ h1:hover, h1:focus {
   bottom: 0;
   top: 0;
   right: 2rem;
-  z-index: 1;
   display: flex;
   align-items: center;
 }
 
 .scroll-nav {
+  z-index: 1;
   list-style-type: none;
   display: flex;
   flex-direction: column;
@@ -186,7 +186,7 @@ form {
   margin-bottom: 15px;
 }
 
-button[type="submit"] {
+.sign-in-button {
   background-color: #4CAF50;
   color: white;
   border: none;
@@ -195,12 +195,8 @@ button[type="submit"] {
   cursor: pointer;
 }
 
-button[type="submit"]:hover {
+.sign-in-button:hover, .sign-in-button:focus {
   background-color: #45a049;
-}
-
-button[type="submit"]:focus {
-  outline: none;
 }
 
 /* OVERVIEW */
