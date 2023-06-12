@@ -162,10 +162,39 @@ h1:hover, h1:focus {
 
 .overview-info { 
   min-width: 33.33%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+  font-size: 18px;
 }
 
+.overview-heading {
+  font-size: 42px;
+  font-weight: 700;
+}
+
+.info {
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: underline;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.address {
+  padding-top: 4px;
+  padding-bottom:4px;
+}
+
+.address:hover, .address:focus {
+  cursor: pointer;
+  color: #EB0000;
+} 
+
 .overview-img {
-  background: url('/src/images/hotel.jpg');
+  background: url('/src/images/spa.jpg');
   background-size: cover;
   min-width: 66.66%;
 }
