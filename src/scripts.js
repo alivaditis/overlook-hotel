@@ -33,7 +33,8 @@ const userIdErr = document.querySelector('.user-id-error')
 const signedInElements = document.querySelectorAll('.signed-in')
 const avatar = document.querySelector('.sign-in-text')
 const fp =  flatpickr(dateSelect, {
-  dateFormat: "Y/m/d"
+  dateFormat: "Y/m/d",
+  minDate: "today"
 });
 
 // GLOBAL VARIABLES
