@@ -1,12 +1,14 @@
 const dateMessage = document.querySelector('.date-message')
 const pleaseSelect = document.querySelector('.please-select-message')
 const roomHeader = document.querySelector('.room-header')
+const bookedMessage = document.querySelector('.booked-message')
+const bookNow = document.querySelector('.book-now')
 
 const renderBookings = (tableElement, bookings) => {
   tableElement.innerHTML = ''
   if (bookings.length) {
   tableElement.innerHTML += `
-     <tr>
+     <tr tabindex="0">
       <th>Date</th>
       <th>Room Type</th>
       <th>Beds</th>
@@ -16,7 +18,7 @@ const renderBookings = (tableElement, bookings) => {
   `
     bookings.forEach((booking, i) => {
     tableElement.innerHTML += `
-      <tr>
+      <tr tabindex="0">
         <td>${booking.date}</td>
         <td>${booking.roomType}</td>
         <td>${booking.numBeds} ${booking.bedSize}</td>
@@ -32,11 +34,14 @@ const renderBookings = (tableElement, bookings) => {
 
 const renderAvailableRooms = (tableElement, rooms) => {
   tableElement.innerHTML = ''
-  if (rooms.length) {
+  if (!rooms.length  || !Array.isArray(rooms))  {
+    tableElement.classList.add('hidden')
+    dateMessage.classList.remove('hidden')
+  } else {
   tableElement.classList.remove('hidden')
   dateMessage.classList.add('hidden')
   tableElement.innerHTML += `
-     <tr>
+     <tr tabindex="0">
       <th>Room Type</th>
       <th>Beds</th>
       <th>Bidet</th>
@@ -45,7 +50,7 @@ const renderAvailableRooms = (tableElement, rooms) => {
   `
     rooms.forEach((room) => {
     tableElement.innerHTML += `
-      <tr id='${room.number}' class='room'>
+      <tr id='${room.number}' class='room click-me' tabindex="0">
         <td class='click-me'>${room.roomType}</td>
         <td class='click-me'>${room.numBeds} ${room.bedSize}</td>
         <td class='click-me'>${room.bidet}</td>
@@ -55,11 +60,9 @@ const renderAvailableRooms = (tableElement, rooms) => {
     });
     roomHeader.classList.remove('hidden')
     pleaseSelect.classList.add('hidden')
-  } else {
-    tableElement.classList.add('hidden')
-    dateMessage.classList.remove('hidden')
   }
 }
+
 
 const renderTableHeader = (element, bookings, past) => {
   if(past) {
@@ -73,4 +76,19 @@ const renderTotalExpense = (element, total) => {
   element.innerText = `Total Expense: $${total}`
 }
 
-export { renderAvailableRooms, renderBookings, renderTotalExpense, renderTableHeader }
+const renderBookingConfirmation = (roomNumber, userId, date) => {
+  bookedMessage.innerText = `Booking Confirmed!\n 
+    UserId: ${userId}\n
+    Room Number: ${roomNumber}\n
+    Date: ${date}`
+  bookNow.classList.add('hidden')
+  bookedMessage.classList.remove('hidden')
+  setTimeout( () => 
+  {
+    bookedMessage.classList.add('hidden');
+    bookNow.classList.remove('hidden')
+  },
+  3000)
+}
+
+export { renderAvailableRooms, renderBookings, renderTotalExpense, renderTableHeader, renderBookingConfirmation }
