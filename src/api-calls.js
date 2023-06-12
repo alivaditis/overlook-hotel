@@ -8,6 +8,12 @@ const getRooms = () => {
   .catch(err => console.log("ERROR", err));
 }
 
+const getUser = (userId) => {
+  return fetch(`http://localhost:3001/api/v1/customers/<${userId}>`)
+  .then(response => console.log(response.json()))
+  // .then(data => data.user)
+  .catch(err => console.log("ERROR", err));}
+
 const getAllBookings = () => {
   return fetch("http://localhost:3001/api/v1/bookings")
     .then(response => response.json())
@@ -67,4 +73,4 @@ const postRoomBooking = (userId, date, roomNumber) => {
   .catch(err => console.log("ERROR", err));
 }
 
-export { getAllBookings, getUserBookings, getRooms, getBookingInfo, getCostsPerNight, postRoomBooking }
+export { getAllBookings, getUserBookings, getRooms, getBookingInfo, getCostsPerNight, postRoomBooking, getUser }

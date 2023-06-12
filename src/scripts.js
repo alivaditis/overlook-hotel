@@ -9,7 +9,7 @@ import './css/styles.css';
 import flatpickr from "flatpickr";
 import 'select-pure/dist/index.js';
 import { calculateExpense, seperateUpcomingPast, sortByDate, filterBookingsByDate, filterBookedRooms, filterByRoomType } from './bookings';
-import { getUserBookings, getBookingInfo, getRooms, getCostsPerNight, getAllBookings, postRoomBooking } from './api-calls';
+import { getUserBookings, getUser, getBookingInfo, getRooms, getCostsPerNight, getAllBookings, postRoomBooking } from './api-calls';
 import { renderAvailableRooms, renderBookings, renderTotalExpense, renderTableHeader, renderBookingConfirmation } from './dom-updates'
 
 console.log('This is the JavaScript entry file - your code begins here.');
@@ -24,16 +24,19 @@ const upcomingHeader = document.querySelector('.upcoming-header')
 const pastHeader = document.querySelector('.past-header')
 const dateSelect = document.querySelector('#date-select')
 const roomTypeSelect = document.querySelector('select-pure')
-const signInButton = document.querySelector('.sign-in')
+const signIn = document.querySelector('.sign-in')
 const signInContainer = document.querySelector('.sign-in-container')
+const signInButton = document.querySelector('.sign-in-button')
+const userInput = document.querySelector('#user')
+const passwordInput = document.querySelector('#password')
 const fp =  flatpickr(dateSelect, {
   dateFormat: "Y/m/d"
 });
 
 // GLOBAL VARIABLES
 
-let rooms
-const userId = 6
+let rooms;
+let userId = 6;
 
 // EVENT LISTENERS
 
@@ -70,16 +73,22 @@ document.addEventListener('focusout', (e) => {
   handleFocusOut(e)
 });
 
-signInButton.addEventListener('click', (e) => {
+signIn.addEventListener('click', (e) => {
   displaySignIn()
 })
 
-signInButton.addEventListener('keydown', (e) => {
+signIn.addEventListener('keydown', (e) => {
   if (e.keyCode !== 13) return
   displaySignIn()
 })
 
-
+signInButton.addEventListener('click', (e) => {
+  e.preventDefault()
+  if  (passwordInput.value === 'overlook2021') {
+  const signInId = substring(userInput.value, 8)
+  getUser(signInId)
+  }
+})
 
 // Functions
 
