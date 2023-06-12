@@ -47,7 +47,10 @@ let userName;
 window.addEventListener('load', () => {
   getRooms()
     .then(result => {
-      rooms = result  
+      rooms = result
+      if(!rooms) {
+        alert("Server is down."); 
+      }
     })
 })
 
