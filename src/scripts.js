@@ -41,7 +41,6 @@ window.addEventListener('load', () => {
       rooms = result  
       displayUserBookings()
     })
-
 })
 
 dateSelect.addEventListener('change', () => {
@@ -58,6 +57,18 @@ bookNowTable.addEventListener('click', (e) => {
   }
 })
 
+bookNowTable.addEventListener('keydown', (e) => {
+  if (e.keyCode !== 13) return
+  if(e.target.classList.contains('click-me')) {
+    bookRoom(e)
+  }
+})
+
+document.addEventListener('focusout', (e) => {
+  handleFocusOut(e)
+});
+
+
 // Functions
 
 const displayAvailableRooms = () => {
@@ -71,7 +82,7 @@ const displayAvailableRooms = () => {
 
 const bookRoom = (e) => {
   const date = dateSelect.value
-  const roomNumber = e.target.parentNode.id
+  const roomNumber = e.target.parentNode.id || e.target.id
   postRoomBooking(userId, date, roomNumber)
   .then(result => {
     displayAvailableRooms()
@@ -91,6 +102,13 @@ const displayUserBookings = () => {
   })
   getCostsPerNight(userId)
     .then(result => renderTotalExpense(totalDisplay, calculateExpense(result)))
+}
+
+function handleFocusOut(e) {
+  const focusedElement = e.target
+  if (!roomTypeSelect.contains(focusedElement)) {
+    roomTypeSelect.close()  
+  }
 }
 
 export { rooms }

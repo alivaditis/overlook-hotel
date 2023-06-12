@@ -72,7 +72,7 @@ h1 {
   color: white;
 }
 
-h1:hover {
+h1:hover, h1:focus {
   color: black;
   cursor: pointer;
 }
@@ -93,7 +93,7 @@ h1:hover {
   padding-left: 4px;
 }
 
-.sign-in:hover img, .sign-in:hover .sign-in-text {
+.sign-in:hover img, .sign-in:hover .sign-in-text, .sign-in:focus img, .sign-in:focus .sign-in-text {
   color: black;
   filter: grayscale(100%);
   cursor: pointer;
@@ -147,7 +147,7 @@ h1:hover {
   padding: 1px 2px;
 }
 
-.nav-item:hover, .sign-in-text:hover {
+.nav-item:hover, .sign-in-text:hover, .nav-item:focus, .sign-in-text:focus {
   cursor: pointer;
   color: black;
 }
@@ -253,7 +253,7 @@ select-pure {
   box-shadow: 0 0 0 1px gray;
 }
 
-.room:hover {
+.room:hover, .room:focus {
   background-color: #EB0000;
   border: 0;
   color: white;

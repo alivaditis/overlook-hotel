@@ -12,17 +12,10 @@
   </style>
 </head>
 <body>
-  <aside class="scroll-nav-container">
-    <nav class="scroll-nav">
-      <a href="#overview" class="nav-item">Overview</a>
-      <a href="#book" class="nav-item">Book Now</a>
-      <a href="#user-dashboard" class="nav-item">Your Bookings</a>
-    </nav>
-  </aside>
   <section class="landing">
     <nav>
-      <h1>Overlook Hotels</h1>
-      <div class='sign-in' role="button">
+      <h1 tabindex="0">Overlook Hotels</h1>
+      <div class='sign-in' role="button" tabindex="0">
         <img class="user-icon" src="images/user.png" alt='user-icon'>
         <p class="sign-in-text">Sign In</p>
       </div>
@@ -31,6 +24,13 @@
       <h2 class="location">Alpine Haven Spa Hotel</h2>
     </article>
   </section>
+  <aside class="scroll-nav-container">
+    <nav class="scroll-nav">
+      <a href="#overview" class="nav-item" tabindex="0">Overview</a>
+      <a href="#book" class="nav-item" tabindex="0">Book Now</a>
+      <a href="#user-dashboard" class="nav-item" tabindex="0">Your Bookings</a>
+    </nav>
+  </aside>
   <section class="overview" id="overview">
     <section class="overview-info">
       Welcome to Overlook Alpine Haven Spa Hotel, a captivating destination nestled in the enchanting village of Zermatt, Switzerland. As part of the renowned Overlook Hotels collection, our retreat offers a luxurious getaway experience in the heart of the Swiss Alps. Immerse yourself in breathtaking landscapes and panoramic mountain views of the iconic Matterhorn from our cozy accommodations. Indulge in our world-class spa and wellness facilities, where rejuvenation and relaxation await. Delight your senses with exquisite dining experiences, showcasing the finest locally sourced ingredients. Embark on adventures through hiking trails, skiing on world-class slopes, or leisurely activities like helicopter rides, all within the picturesque setting of Zermatt. Whether you're planning an exclusive event or seeking a personal retreat, Overlook Alpine Haven Spa Hotel promises an unforgettable Alpine escape, providing the perfect blend of serenity, indulgence, and warm hospitality, synonymous with the Overlook Hotels name.
@@ -53,8 +53,8 @@
       </div>
       <section class="book-now">
         <h2 class="please-select-message">Select a date to book a room.</h2>
-        <h2 class="room-header hidden">Available Rooms</h2>
-        <p class="date-message hidden">No rooms availbale for that date.  Try another date.</p>
+        <h2 class="room-header hidden" tabindex="0">Available Rooms</h2>
+        <p class="date-message hidden" tabindex="0">No rooms availbale for that date.  Try another date.</p>
         <table class="book-now-table">
         </table>
       </section>
@@ -67,47 +67,17 @@
     <div class="dashboard-container">
       <div class="table-container">
         <section class="upcoming">
-          <h2 class="upcoming-header">Upcoming Bookings</h2>
+          <h2 class="upcoming-header" tabindex="0">Upcoming Bookings</h2>
           <table class="upcoming-table">
-            <tr>
-              <th>Date Booked</th>
-              <th>Room Type</th>
-              <th>Bidet</th>
-              <th>Bed Size</th>
-              <th>Bed Number</th>
-              <th>Cost Per Night</th>
-            </tr>
-            <tr>
-              <td>6/5/23</td>
-              <td>Suite</td>
-              <td>True</td>
-              <td>Queen</td>
-              <td>1</td>
-              <td>$1,000</td>
-            </tr>
+            <!-- Your upcoming bookings will appear here -->
           </table>
         </section>
         <section class="past">
-        <h2 class="past-header">Past Bookings</h2>
-        <table class="past-table">  
-            <tr>
-              <th>Date Booked</th>
-              <th>Room Type</th>
-              <th>Bidet</th>
-              <th>Bed Size</th>
-              <th>Bed Number</th>
-              <th>Cost Per Night</th>
-            </tr>
-            <tr>
-              <td>6/5/23</td>
-              <td>Suite</td>
-              <td>True</td>
-              <td>Queen</td>
-              <td>1</td>
-              <td>$1,000</td>
-            </tr>
+          <h2 class="past-header" tabindex="0">Past Bookings</h2>
+          <table class="past-table">  
+            <!-- Your past bookings will appear here -->
           </table>
-          <section class="total-expense">Total Exense: $4,000</section>
+          <section class="total-expense" tabindex="0">Total Exense: $4,000</section>
         </section>
       </div>
     </div>
