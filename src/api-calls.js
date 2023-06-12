@@ -1,11 +1,31 @@
 import { filterBookingsByUser, getRoomByNumber } from "./bookings";
 import { rooms } from "./scripts"
 
+const userIdErr = document.querySelector('.user-id-error')
+
 const getRooms = () => {
   return fetch("http://localhost:3001/api/v1/rooms")
   .then(response => response.json())
   .then(data => data.rooms)
   .catch(err => console.log("ERROR", err));
+}
+  
+const getUser = (userId) => {
+  return fetch(`http://localhost:3001/api/v1/customers/${userId}`)
+    .then(response => {
+      if (!response.ok) {
+        return response.json()
+          .then(error => {
+            userIdErr.innerText = `${error.message}`
+            userIdErr.classList.remove('hidden')
+            throw new Error(error)
+          });
+      } else {
+        const data = response.json();
+        return data;
+      }
+    })
+    .catch(err => console.log("ERROR", err));
 }
 
 const getAllBookings = () => {
@@ -67,4 +87,4 @@ const postRoomBooking = (userId, date, roomNumber) => {
   .catch(err => console.log("ERROR", err));
 }
 
-export { getAllBookings, getUserBookings, getRooms, getBookingInfo, getCostsPerNight, postRoomBooking }
+export { getAllBookings, getUserBookings, getRooms, getBookingInfo, getCostsPerNight, postRoomBooking, getUser }

@@ -22,13 +22,23 @@
     </nav>
     <article class="splash">
       <h2 class="location">Alpine Haven Spa Hotel</h2>
+      <section class="sign-in-container hidden">
+        <form>
+          <label for="username" class="sign-in-label">Username:</label>
+          <input type="text" id="username" name="username" class='sign-in-input' required>
+          <label for="password" class="sign-in-label">Password:</label>
+          <input type="password" id="password" name="password" class='sign-in-input' required>
+          <p class="user-id-error hidden"></p>
+          <button type="submit" class="sign-in-button">Sign In</button>
+        </form>
+      </section>
     </article>
   </section>
   <aside class="scroll-nav-container">
     <nav class="scroll-nav">
       <a href="#overview" class="nav-item" tabindex="0">Overview</a>
-      <a href="#book" class="nav-item" tabindex="0">Book Now</a>
-      <a href="#user-dashboard" class="nav-item" tabindex="0">Your Bookings</a>
+      <a href="#book" class="nav-item signed-in hidden" tabindex="0">Book Now</a>
+      <a href="#user-dashboard" class="nav-item signed-in hidden" tabindex="0">Your Bookings</a>
     </nav>
   </aside>
   <section class="overview" id="overview">
@@ -45,7 +55,7 @@
     </div>
     <div class="overview-img"></div>
   </section>
-  <div class="book-container">
+  <div class="book-container signed-in hidden">
     <section class="book" id="book">
       <div class="inputs-container">
         <div class="date-container">
@@ -71,7 +81,7 @@
       </p>
     </section>
   </div>
-  <section class="user-dashboard" id="user-dashboard">
+  <section class="user-dashboard signed-in hidden" id="user-dashboard">
     <div class="dashboard-container">
       <div class="table-container">
         <section class="upcoming">

@@ -9,7 +9,7 @@ import './css/styles.css';
 import flatpickr from "flatpickr";
 import 'select-pure/dist/index.js';
 import { calculateExpense, seperateUpcomingPast, sortByDate, filterBookingsByDate, filterBookedRooms, filterByRoomType } from './bookings';
-import { getUserBookings, getBookingInfo, getRooms, getCostsPerNight, getAllBookings, postRoomBooking } from './api-calls';
+import { getUserBookings, getUser, getBookingInfo, getRooms, getCostsPerNight, getAllBookings, postRoomBooking } from './api-calls';
 import { renderAvailableRooms, renderBookings, renderTotalExpense, renderTableHeader, renderBookingConfirmation } from './dom-updates'
 
 console.log('This is the JavaScript entry file - your code begins here.');
@@ -24,22 +24,33 @@ const upcomingHeader = document.querySelector('.upcoming-header')
 const pastHeader = document.querySelector('.past-header')
 const dateSelect = document.querySelector('#date-select')
 const roomTypeSelect = document.querySelector('select-pure')
+const signIn = document.querySelector('.sign-in')
+const signInContainer = document.querySelector('.sign-in-container')
+const signInButton = document.querySelector('.sign-in-button')
+const userInput = document.querySelector('#username')
+const passwordInput = document.querySelector('#password')
+const userIdErr = document.querySelector('.user-id-error')
+const signedInElements = document.querySelectorAll('.signed-in')
+const avatar = document.querySelector('.sign-in-text')
 const fp =  flatpickr(dateSelect, {
   dateFormat: "Y/m/d"
 });
 
 // GLOBAL VARIABLES
 
-let rooms
-const userId = 6
+let rooms;
+let userId;
+let userName;
 
 // EVENT LISTENERS
 
 window.addEventListener('load', () => {
   getRooms()
     .then(result => {
-      rooms = result  
-      displayUserBookings()
+      rooms = result
+      if(!rooms) {
+        alert("Server is down."); 
+      }
     })
 })
 
@@ -68,6 +79,45 @@ document.addEventListener('focusout', (e) => {
   handleFocusOut(e)
 });
 
+signIn.addEventListener('click', (e) => {
+  displaySignIn()
+})
+
+signIn.addEventListener('keydown', (e) => {
+  if (e.keyCode !== 13) return
+  displaySignIn()
+})
+
+signInButton.addEventListener('click', (e) => {
+  e.preventDefault()
+  if  (validatePassword(passwordInput.value) && validateUsername(userInput.value)) {
+  const signInId = userInput.value.substring(8)
+  userIdErr.classList.add('hidden')
+  getUser(signInId)
+    .then(data => {
+      userInput.value=''
+      passwordInput.value=''
+      userId = data.id
+      userName = data.name
+      avatar.innerText = `${userName}`
+      signInContainer.classList.add('hidden')
+      displayUserBookings()
+      signedInElements.forEach(element => {
+        element.classList.remove('hidden')
+      })
+    })
+  } else if (!passwordInput.value || !userInput.value) {
+    userIdErr.innerText = 'Not a valid username or password.'
+    userIdErr.classList.remove('hidden')
+    userInput.value=''
+    passwordInput.value=''
+  } else {
+    userIdErr.innerText = 'Username and password do not match.'
+    userIdErr.classList.remove('hidden')
+    userInput.value=''
+    passwordInput.value=''
+  }
+})
 
 // Functions
 
@@ -108,6 +158,23 @@ function handleFocusOut(e) {
   const focusedElement = e.target
   if (!roomTypeSelect.contains(focusedElement)) {
     roomTypeSelect.close()  
+  }
+}
+
+const displaySignIn = () => {
+  signInContainer.classList.toggle('hidden')
+}
+
+const validateUsername = (username)  => {
+  const pattern = /^customer\d+$/; // regex pattern: starts with 'customer' followed by one or more digits
+  return pattern.test(username);
+}
+
+const validatePassword = (password) => {
+  if(password === 'overlook2021') {
+    return true
+  } else {
+    return false
   }
 }
 
