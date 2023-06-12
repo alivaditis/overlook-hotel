@@ -1,7 +1,7 @@
 # Overlook
 
 ## Abstract:
-A hotel dashboard system allows customers to log in and plan their next stay. Users can log in using different usernames and view different information such as the number of upcoming and past bookings, details on bookings, and the total amount spent to date. User can also book their next stay and filter the available rooms by multiple room types.  Available rooms will be displayed based on the results of network requests.
+A hotel dashboard system allows customers to log in and plan their next stay. Users can log in using different usernames and view different information such as the number of upcoming and past bookings, details on bookings, and the total amount spent to date. Users can also book their next stay and filter the available rooms by multiple room types.  Available rooms will be displayed based on the results of network requests.
 
 ## Installation Instructions:
 1. Clone this repository https://github.com/alivaditis/overlook-hotel using the generated SSH link in the terminal
