@@ -4,6 +4,14 @@ const roomHeader = document.querySelector('.room-header')
 const bookedMessage = document.querySelector('.booked-message')
 const bookNow = document.querySelector('.book-now')
 
+const renderCheckMarks = (bidet) => {
+  const checks = {
+    'true': '\u2713',
+    'false': ' '
+  }
+  return checks[bidet]
+}
+
 const renderBookings = (tableElement, bookings) => {
   tableElement.innerHTML = ''
   if (bookings.length) {
@@ -16,13 +24,13 @@ const renderBookings = (tableElement, bookings) => {
       <th class='number'>Cost</th>
     </tr>
   `
-    bookings.forEach((booking, i) => {
+    bookings.forEach((booking) => {
     tableElement.innerHTML += `
       <tr tabindex="0">
         <td>${booking.date}</td>
         <td>${booking.roomType}</td>
         <td>${booking.numBeds} ${booking.bedSize}</td>
-        <td>${booking.bidet}</td>
+        <td>${renderCheckMarks(booking.bidet)}</td>
         <td class='number'>$${booking.costPerNight.toFixed(2)}</td>
       <tr>
     `
@@ -53,7 +61,7 @@ const renderAvailableRooms = (tableElement, rooms) => {
       <tr id='${room.number}' class='room click-me' tabindex="0">
         <td class='click-me'>${room.roomType}</td>
         <td class='click-me'>${room.numBeds} ${room.bedSize}</td>
-        <td class='click-me'>${room.bidet}</td>
+        <td class='click-me'>${renderCheckMarks(room.bidet)}</td>
         <td class='click-me number'>$${room.costPerNight.toFixed(2)}</td>
       <tr>
     `
