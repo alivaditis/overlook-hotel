@@ -167,8 +167,8 @@ const displaySignIn = () => {
 }
 
 const validateUsername = (username)  => {
-  const pattern = /^customer\d+$/; // regex pattern: starts with 'customer' followed by one or more digits
-  return pattern.test(username);
+  const pattern = /^customer\d+$/
+  return pattern.test(username)
 }
 
 const validatePassword = (password) => {
