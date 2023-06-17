@@ -32,5 +32,5 @@ A hotel dashboard system allows customers to log in and plan their next stay. Us
 - Ensure the site is accessible for as many users as possible
 
 ## Wins + Challenges:
-- Successfully handling asynchronous code, rendering data on the page after network requests
+- Successfully handling asynchronous code, rendering data on the page reflecting data retrieved from network requests
 - Using flatpickr and pure-select input dependencies to filter bookings by date and multiple room types
